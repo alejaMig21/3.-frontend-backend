@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="CDR" showEffect="fade" modal="true"
+		widgetVar="manageCDRDialog" responsive="true">
+		<p:outputPanel id="manage-cdr-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty manageCDRBean.selectedCDR}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next">Nombre:</p:outputLabel>
+							<p:inputText id="name" class="test" required="true" 
+								value="#{manageCDRBean.selectedCDR.namCDR}" />
+							<p:message for="@previous" ></p:message>
+						</div>			
+					</h:panelGroup>
+					<h:panelGroup>
+						<h:form>
+							<div class="p-field">
+								<p:outputLabel>Colegio:</p:outputLabel>
+								<p:selectOneMenu class="test" id="option" required="true" value="#{selectOneMenuView.selectedOption}">
+					                 <f:selectItem itemLabel="Colegio #1" itemValue="Option1"/>
+					                 <f:selectItem itemLabel="Colegio #2" itemValue="Option2"/>
+					                 <f:selectItem itemLabel="Colegio #3" itemValue="Option3"/>
+					                 <f:selectItem itemLabel="Colegio #4" itemValue="Option1"/>
+					                 <f:selectItem itemLabel="Colegio #5" itemValue="Option2"/>
+					                 <f:selectItem itemLabel="Colegio #6" itemValue="Option3"/>
+					                 <f:selectItem itemLabel="Colegio #7" itemValue="Option1"/>
+					                 <f:selectItem itemLabel="Colegio #8" itemValue="Option2"/>
+					                 <f:selectItem itemLabel="Colegio #9" itemValue="Option3"/>
+              					</p:selectOneMenu>
+							</div>
+						</h:form>
+						</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageCDRBean.saveCDR}"
+				update="manage-cdr-content" process="manage-cdr-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageCDRDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

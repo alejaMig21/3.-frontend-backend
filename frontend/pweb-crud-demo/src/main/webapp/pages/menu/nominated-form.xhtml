@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Nominado" showEffect="fade" modal="true"
+		widgetVar="manageNominatedDialog" responsive="true">
+		<p:outputPanel id="manage-nominated-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty manageNominatedBean.selectedNominated}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next">Nombre:</p:outputLabel>
+							<p:inputText id="name" class="test" required="true" 
+								value="#{manageNominatedBean.selectedNominated.namVot}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Telefono:</p:outputLabel>
+							<p:inputText id="telefono" class="test" required="true"
+								value="#{manageNominatedBean.selectedNominated.phoneNomi}"
+								maxlength="8">
+								<p:keyFilter mask="num" />
+							</p:inputText>
+							<p:message for="@previous"></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Ocupacion:</p:outputLabel>
+							<p:inputText id="ocupacion" class="test" required="true"
+								value="#{manageNominatedBean.selectedNominated.ocupNomi}" />
+							<p:message for="@previous"></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Profesion:</p:outputLabel>
+							<p:inputText id="profesion" class="test" required="true"
+								value="#{manageNominatedBean.selectedNominated.profeNomi}" />
+							<p:message for="@previous"></p:message>
+						</div>
+					</h:panelGroup>
+					<h:panelGroup>
+					    <div class="p-field">
+							<p:outputLabel for="@next">Integridad:</p:outputLabel>
+							<p:inputText id="integridad" class="test" required="true"
+								value="#{manageNominatedBean.selectedNominated.intgRNomi}" />
+							<p:message for="@previous"></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel>Fecha de Nacimiento:</p:outputLabel>
+							<p:datePicker class="test" id="fecha_nac" value="#{calendarView.date7}" showIcon="true" />
+						</div>
+						<div class="p-field">
+							<p:outputLabel>Biografia:</p:outputLabel>
+							<p:inputTextarea class="test" rows="5" cols="30"
+                         		counterTemplate="{0} characters remaining." autoResize="false"/>
+						</div>
+						<div class="p-field">
+                            <p:outputLabel for="@next">CDR:</p:outputLabel>
+                            <p:selectOneMenu id="cdr" class="test" required="true" label="Seleccione"
+                                             value="#{manageCDRBean.selectedCDR.namCDR}"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250">
+                                <f:selectItems value="#{manageCDRBean.cdrs}" var="cdr"
+                                               itemLabel="#{CDRDto.namCDR}" itemValue="#{CDRDto.namCDR}" />
+                            </p:selectOneMenu>
+                            <p:message for="@previous"></p:message>
+                        </div>
+					</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageNominatedBean.saveNominated}"
+				update="manage-nominated-content" process="manage-nominated-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageNominatedDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>
