@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import cu.edu.cujae.backend.core.dto.Electoral_CollegeDto;
+import cu.edu.cujae.backend.core.dto.CollegeDto;
 import cu.edu.cujae.backend.core.service.CollegeService;
 
 @Service
@@ -27,18 +27,18 @@ public class CollegeServiceImpl implements CollegeService {
    @Autowired
    private JdbcTemplate jdbcTemplate;
 
-   public Electoral_CollegeDto createNewDto(ResultSet resultSet) throws SQLException {
+   public CollegeDto createNewDto(ResultSet resultSet) throws SQLException {
       int id_college = resultSet.getInt(1); // parametro 1
       String name_college = resultSet.getString(2); // parametro 2
       String address = resultSet.getString(3); // parametro 3
       int district = resultSet.getInt(4); // parametro 4
 
-      return new Electoral_CollegeDto(id_college, name_college, address, district);
+      return new CollegeDto(id_college, name_college, address, district);
    }
 
    @Override
-   public List<Electoral_CollegeDto> listColleges() throws SQLException { // Aparentemente esta funcion ya esta
-      List<Electoral_CollegeDto> list = new ArrayList<>();
+   public List<CollegeDto> listColleges() throws SQLException { // Aparentemente esta funcion ya esta
+      List<CollegeDto> list = new ArrayList<>();
 
       //String function = "{?= call SELECT * FROM college}";
       String function = "{?= call read_list_college()}";
@@ -63,7 +63,7 @@ public class CollegeServiceImpl implements CollegeService {
          // int cant_vote = resultSet.getInt(9); // parametro 9
 
          //NominatedDto dto = new NominatedDto(occupation, profetion, phone, int_rev, bio_data, id_nominated, id_voter, process_e, cant_vote);
-         Electoral_CollegeDto dto = createNewDto(resultSet);
+         CollegeDto dto = createNewDto(resultSet);
          list.add(dto);
       }
 
@@ -71,8 +71,8 @@ public class CollegeServiceImpl implements CollegeService {
    }
 
    @Override
-   public Electoral_CollegeDto getCollegeById(int collegeId) throws SQLException {
-      Electoral_CollegeDto college = null;
+   public CollegeDto getCollegeById(int collegeId) throws SQLException {
+      CollegeDto college = null;
 
       PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
                 "SELECT * FROM college where id_college = ?");
@@ -100,26 +100,26 @@ public class CollegeServiceImpl implements CollegeService {
    }
 
    @Override
-   public void createCollege(Electoral_CollegeDto college) throws SQLException { // Originalmente aqui no se creaba el ID
+   public void createCollege(CollegeDto college) throws SQLException { // Originalmente aqui no se creaba el ID
         String function = "{call create_college(?,?,?)}";
 
         CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
         statement.setString(1, college.getNameCollege());
-        statement.setString(2, college.getAdress());
-        statement.setInt(3, college.getId_district());
+        statement.setString(2, college.getAddress());
+        statement.setInt(3, college.getDistrict()); // Es el ID
         statement.execute();
 
    }
 
    @Override
-   public void updateCollege(Electoral_CollegeDto cdr) throws SQLException { // Originalmente este metodo actualizaba ademas de los valores del Dto su ID tambien
+   public void updateCollege(CollegeDto cdr) throws SQLException { // Originalmente este metodo actualizaba ademas de los valores del Dto su ID tambien
       String function = "{call update_college(?,?,?,?)}";
 
       CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
-      statement.setInt(1, cdr.getCodCollege());
-      statement.setInt(2, cdr.getId_district());
+      statement.setInt(1, cdr.getId_college());
+      statement.setInt(2, cdr.getDistrict()); // Es el ID
       statement.setString(3, cdr.getNameCollege());
-      statement.setString(4, cdr.getAdress());
+      statement.setString(4, cdr.getAddress());
       statement.execute();
 
    }

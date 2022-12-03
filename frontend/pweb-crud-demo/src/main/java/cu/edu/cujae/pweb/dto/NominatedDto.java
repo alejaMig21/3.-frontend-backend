@@ -11,14 +11,13 @@ public class NominatedDto extends VoterDto{
 	private int idVoter;
 	private int processE;
 	private int cantVotes;
-	private boolean newRecord;
 
 	public NominatedDto() {
 		super();
 	}
 	public NominatedDto(String ocupNomi, String profeNomi, String phoneNomi,
 			String intgRNomi, String biogDataNomi, int idNominated,
-			int idVoter, int processE, int cantVotes, boolean newRecord) {
+			int idVoter, int processE, int cantVotes) {
 		super();
 		this.ocupNomi = ocupNomi;
 		this.profeNomi = profeNomi;
@@ -29,7 +28,6 @@ public class NominatedDto extends VoterDto{
 		this.idVoter = idVoter;
 		this.processE = processE;
 		this.cantVotes = cantVotes;
-		this.setNewRecord(newRecord);
 	}
 	public int getIdNominated() {
 		return idNominated;
@@ -93,11 +91,4 @@ public class NominatedDto extends VoterDto{
 	public void setBiogDataNomi(String biogDataNomi) {
 		this.biogDataNomi = biogDataNomi;
 	}
-	public boolean isNewRecord() {
-		return newRecord;
-	}
-	public void setNewRecord(boolean newRecord) {
-		this.newRecord = newRecord;
-	}
-	
 }

@@ -1,6 +1,4 @@
-package cu.edu.cujae.pweb.dto;
-
-//import java.util.ArrayList;
+package cu.edu.cujae.backend.core.dto;
 
 public class CollegeDto {
 	

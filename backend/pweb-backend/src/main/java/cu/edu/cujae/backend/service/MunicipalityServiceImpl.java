@@ -19,9 +19,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import cu.edu.cujae.backend.core.dto.MunicipalityDto;
-import cu.edu.cujae.backend.core.dto.NominatedDto;
 import cu.edu.cujae.backend.core.service.MunicipalityService;
-import cu.edu.cujae.backend.core.service.NominatedService;
 
 @Service
 public class MunicipalityServiceImpl implements MunicipalityService {
@@ -106,7 +104,7 @@ public class MunicipalityServiceImpl implements MunicipalityService {
 
         CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
         //statement.setInt(1, municipality.getCodMun());
-        statement.setString(1, municipality.getNamMun());
+        statement.setString(1, municipality.getNameMunicipality());
         statement.execute();
 
    }
@@ -117,7 +115,7 @@ public class MunicipalityServiceImpl implements MunicipalityService {
 
       CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
       statement.setInt(1, municipality.getCodMun());
-      statement.setString(2, municipality.getNamMun());
+      statement.setString(2, municipality.getNameMunicipality());
       statement.execute();
 
    }

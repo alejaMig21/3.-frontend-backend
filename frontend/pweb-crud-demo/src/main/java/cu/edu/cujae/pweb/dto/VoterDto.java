@@ -11,7 +11,6 @@ public class VoterDto {
 	private int cdr;
 	private int vote;
 	private String cause;
-	private boolean newRecord;
 
 	public VoterDto() {
 		super();
@@ -67,11 +66,5 @@ public class VoterDto {
 	}
 	public void setDateVot(Timestamp dateVot) {
 		this.birthdayVot = dateVot;
-	}
-	public boolean isNewRecord() {
-		return newRecord;
-	}
-	public void setNewRecord(boolean newRecord) {
-		this.newRecord = newRecord;
 	}
 }

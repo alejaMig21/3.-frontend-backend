@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cu.edu.cujae.backend.core.dto.Electoral_CollegeDto;
+import cu.edu.cujae.backend.core.dto.CollegeDto;
 import cu.edu.cujae.backend.core.service.CollegeService;
 
 @RestController
@@ -25,25 +25,25 @@ public class CollegeController {
 	private CollegeService collegeService;
 	
 	@GetMapping("/")
-    public ResponseEntity<List<Electoral_CollegeDto>> getColleges() throws SQLException {
-		List<Electoral_CollegeDto> userList = collegeService.listColleges();
+    public ResponseEntity<List<CollegeDto>> getColleges() throws SQLException {
+		List<CollegeDto> userList = collegeService.listColleges();
         return ResponseEntity.ok(userList);
     }
 	
 	@GetMapping("/{id}")
-    public ResponseEntity<Electoral_CollegeDto> getCollegeById(@PathVariable int id) throws SQLException {
-		Electoral_CollegeDto user = collegeService.getCollegeById(id);
+    public ResponseEntity<CollegeDto> getCollegeById(@PathVariable int id) throws SQLException {
+		CollegeDto user = collegeService.getCollegeById(id);
         return ResponseEntity.ok(user);
     }
 	
 	@PostMapping("/")
-    public ResponseEntity<String> createCollege(@RequestBody Electoral_CollegeDto college) throws SQLException {
+    public ResponseEntity<String> createCollege(@RequestBody CollegeDto college) throws SQLException {
 		collegeService.createCollege(college);
         return ResponseEntity.ok("College Created");
     }
 	
 	@PutMapping("/")
-    public ResponseEntity<String> updateCollege(@RequestBody Electoral_CollegeDto college) throws SQLException {
+    public ResponseEntity<String> updateCollege(@RequestBody CollegeDto college) throws SQLException {
 		//TODO code for update
         collegeService.updateCollege(college);
         return ResponseEntity.ok("College pdated");

@@ -2,7 +2,7 @@ package cu.edu.cujae.pweb.dto;
 
 import java.util.Date;
 
-public class Trace {
+public class TraceDto {
 
     private int idTrace;
     private int user;
@@ -10,10 +10,10 @@ public class Trace {
     private Date date;
     private int ip;
 
-    public Trace() {
+    public TraceDto() {
 		super();
 	}
-	public Trace(int idTrace, int user, String operation, Date date, int ip) {
+	public TraceDto(int idTrace, int user, String operation, Date date, int ip) {
 		super();
 		this.idTrace = idTrace;
 		this.user = user;

@@ -3,7 +3,7 @@ package cu.edu.cujae.backend.core.dto;
 public class MunicipalityDto {
 	
 	private int codMun;
-	private String namMun;
+	private String nameMunicipality;
 	
 	public MunicipalityDto() {
 		super();
@@ -11,7 +11,7 @@ public class MunicipalityDto {
 	public MunicipalityDto(int codMun, String namMun) {
 		super();
 		this.codMun = codMun;
-		this.namMun = namMun;
+		this.nameMunicipality = namMun;
 	}
 	public int getCodMun() {
 		return codMun;
@@ -19,11 +19,11 @@ public class MunicipalityDto {
 	public void setCodMun(int codMun) {
 		this.codMun = codMun;
 	}
-	public String getNamMun() {
-		return namMun;
+	public String getNameMunicipality() {
+		return nameMunicipality;
 	}
-	public void setNamMun(String namMun) {
-		this.namMun = namMun;
+	public void setNameMunicipality(String namMun) {
+		this.nameMunicipality = namMun;
 	}
 	
 	

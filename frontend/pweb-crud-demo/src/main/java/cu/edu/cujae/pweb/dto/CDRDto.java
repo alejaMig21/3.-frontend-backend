@@ -8,16 +8,13 @@ public class CDRDto {
 	private String namCDR;
 	private int id_presidentCDR;
 	private int id_college;
-	private boolean newRecord;
 
-	
-	public CDRDto(int codCDR, String namCDR, int id_presidentCDR, int id_college, boolean newRecord) {
+	public CDRDto(int codCDR, String namCDR, int id_presidentCDR, int id_college) {
 		super();
 		this.codCDR = codCDR;
 		this.namCDR = namCDR;
 		this.id_presidentCDR = id_presidentCDR;
 		this.id_college = id_college;
-		this.newRecord = newRecord;
 	}
 
 	public CDRDto() {
@@ -49,14 +46,5 @@ public class CDRDto {
 	}
 	public void setNam_presidentCDR(int id_presidentCDR) {
 		this.id_presidentCDR = id_presidentCDR;
-	}
-	public boolean isNewRecord() {
-		return newRecord;
-	}
-
-	public void setNewRecord(boolean newRecord) {
-		this.newRecord = newRecord;
-	}
-
-	
+	}	
 }
