@@ -54,7 +54,7 @@
 							<p:inputTextarea class="test" rows="5" cols="30"
                          		counterTemplate="{0} characters remaining." autoResize="false"/>
 						</div>
-						<div class="p-field">
+						<!-- <div class="p-field">
                             <p:outputLabel for="@next">CDR:</p:outputLabel>
                             <p:selectOneMenu id="cdr" class="test" required="true" label="Seleccione"
                                              value="#{manageCDRBean.selectedCDR.namCDR}"
@@ -65,7 +65,32 @@
                                                itemLabel="#{CDRDto.namCDR}" itemValue="#{CDRDto.namCDR}" />
                             </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
-                        </div>
+                        </div> -->
+						<div class="p-field">
+							<p:outputLabel
+							  for="@next"
+							  value= "Seleccione el Municipio"
+							/>
+							<p:selectOneMenu
+							  id="municipality"
+							  value="#{manageNominatedBean.selectedMunicipalityName}"
+							  required="true"
+							  style="min-width: 15rem"
+							  multiple="true"
+							  filter="true"
+							  filterMatchMode="startsWith"
+							  panelStyle="width: 30rem"
+							  scrollHeight="250"
+							>
+							  <f:selectItems
+								value="#{manageMunicipalityBean.municipalitys}"
+								var="municipality"
+								itemLabel="#{municipality.nameMunicipality}"
+								itemValue="#{municipality.nameMunicipality}"
+							  />
+							</p:selectOneMenu>
+							<p:message for="@previous" />
+						  </div>
 					</h:panelGroup>
 				</p:panelGrid>
 			</p:outputPanel>

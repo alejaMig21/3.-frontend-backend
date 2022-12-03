@@ -31,7 +31,7 @@ public class CDRServiceImpl implements CDRService{
 	    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		    ApiRestMapper<CDRDto> apiRestMapper = new ApiRestMapper<>();
 			//params.add("name_cdr", "Rodolfo");
-		    String response = (String)restService.GET("/api/v1/cdrs", params, String.class).getBody();
+		    String response = (String)restService.GET("/api/v1/cdrs/", params, String.class).getBody();
 		    cdrList = apiRestMapper.mapList(response, CDRDto.class);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -52,7 +52,7 @@ public class CDRServiceImpl implements CDRService{
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<CDRDto> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/api/v1/cdrs" + "{idCDR}");
+            UriTemplate template = new UriTemplate("/api/v1/cdrs/" + "{idCDR}");
             String uri = template.expand(idCDR).toString();
             String response = (String) restService.GET(uri, params, String.class).getBody();
             cdr = apiRestMapper.mapOne(response, CDRDto.class);
@@ -65,21 +65,21 @@ public class CDRServiceImpl implements CDRService{
 	@Override
 	public void createCDR(CDRDto cdr) {
 		// TODO Auto-generated method stub
-		restService.POST("/api/v1/cdrs" + "", cdr, String.class).getBody();
+		restService.POST("/api/v1/cdrs/" + "", cdr, String.class).getBody();
 	}
 
 	@Override
 	public void updateCDR(CDRDto cdr) {
 		// TODO Auto-generated method stub
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        restService.PUT("/api/v1/cdrs" + "", params, cdr, String.class).getBody();
+        restService.PUT("/api/v1/cdrs/" + "", params, cdr, String.class).getBody();
 	}
 
 	@Override
 	public void deleteCDR(int idCDR) { // Originalmente era String
 		// TODO Auto-generated method stub
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        UriTemplate template = new UriTemplate("/api/v1/cdrs" + "{idCDR}");
+        UriTemplate template = new UriTemplate("/api/v1/cdrs/" + "{idCDR}");
         String uri = template.expand(idCDR).toString();
         restService.DELETE(uri, params, String.class, null).getBody();
 	}

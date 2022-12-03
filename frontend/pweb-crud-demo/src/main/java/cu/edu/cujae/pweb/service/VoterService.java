@@ -6,8 +6,8 @@ import cu.edu.cujae.pweb.dto.VoterDto;
 
 public interface VoterService {
 	List<VoterDto> getVoters();
-	//NominatedDto getNominatedById(String userId);
+	VoterDto getVoterById(int userId);
 	void createVoter(VoterDto user);
 	void updateVoter(VoterDto user);
-	void deleteVoter(String id);
+	void deleteVoter(int id);
 }

@@ -127,6 +127,15 @@ public class ManageCDRBean {
 
     private List<CDRDto> cdrs;
     private CDRDto selectedCDR;
+    private String selectedCollegeName;
+
+    public String getSelectedCollegeName() {
+        return this.selectedCollegeName;
+    }
+
+    public void setSelectedCollegeName(String selectedCollegeName) {
+        this.selectedCollegeName = selectedCollegeName;
+    }
 
     @Autowired
     private CDRService service;
@@ -178,11 +187,11 @@ public class ManageCDRBean {
 
     }
 
-    public List<CDRDto> getCDRs() {
+    public List<CDRDto> getCdrs() {
         return this.cdrs;
     }
 
-    public void setCDRs(List<CDRDto> cdrs) {
+    public void setCdrs(List<CDRDto> cdrs) {
         this.cdrs = cdrs;
     }
 

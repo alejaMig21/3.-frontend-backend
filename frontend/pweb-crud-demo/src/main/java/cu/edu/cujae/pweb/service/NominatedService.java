@@ -6,8 +6,8 @@ import cu.edu.cujae.pweb.dto.NominatedDto;
 
 public interface NominatedService {
 	List<NominatedDto> getNominateds();
-	//NominatedDto getNominatedById(String userId);
-	void createNominated(NominatedDto user);
-	void updateNominated(NominatedDto user);
-	void deleteNominated(String id);
+	NominatedDto getNominatedById(int idNominated);
+	void createNominated(NominatedDto nominated);
+	void updateNominated(NominatedDto nominated);
+	void deleteNominated(int idNominated);
 }

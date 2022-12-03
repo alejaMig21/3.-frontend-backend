@@ -1,59 +1,84 @@
 package cu.edu.cujae.pweb.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriTemplate;
 
 import cu.edu.cujae.pweb.dto.VoterDto;
+import cu.edu.cujae.pweb.utils.ApiRestMapper;
+import cu.edu.cujae.pweb.utils.RestService;
 
-/* Esta anotiacioon le indica a spring que esta clase es un servicio y por tanto luego podr� inyectarse en otro lugar usando
- * @Autowired. En estas implementaciones luego se pondraan las llamadas al proyecto backend
- */
 @Service
 public class VoterServiceImpl implements VoterService{
+
+	@Autowired
+	private RestService restService;
 
 	@Override
 	public List<VoterDto> getVoters() {
 		
-		List<VoterDto> voters = new ArrayList<>();
-//		nominateds.add(new NominatedDto(, , , , , , , ));
-//		nominateds.add(new NominatedDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "psuarez", "Perseo Suarez Tamyo", "sdfsd545", "psuarez@email.com", "69852147856", adminRole, false));
-//		nominateds.add(new NominatedDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "scamejo", "Sandor Camejo Rayas", "343fsdfddds", "scamejo@email.com", "54785698547", adminRole, false));
-//		nominateds.add(new NominatedDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "rcoas", "Ronaldo Coas Saldivar", "2w2ee22ww2", "rcoas@email.com", "36985214785", adminRole, false));
-//		nominateds.add(new NominatedDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "hribas", "Hector Ribas Traki", "wwew443ewe", "hribas@email.com", "23698547852", adminRole, false));
-//		nominateds.add(new NominatedDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "cestrada", "Camilo Estrada Lopez", "34hjhj3343k", "cestrada@email.com", "23698547412", adminRole, false));
-//		nominateds.add(new NominatedDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "fromero", "Facundo Romero Ramen", "3www4ewwewe", "fromero@email.com", "85669854125", asesorRole, false));
-//		nominateds.add(new NominatedDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "ptobal", "P�nfilo Tobal Madrid", "343sd3443wwe", "ptobal@email.com", "25147856325", asesorRole, false));
-//		nominateds.add(new NominatedDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "imeri�o", "Ian Meri�o Sandival", "4weer4ewere", "imeri�o@email.com", "21254789632", allRoles, false));
-//		nominateds.add(new NominatedDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "jpacheco", "Javier Pacheco Losada", "8555weweww", "jpacheco@email.com", "96582365147", allRoles, false));
-		
-		return voters;
+		List<VoterDto> cdrList = new ArrayList<VoterDto>();
+	    try {
+	    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		    ApiRestMapper<VoterDto> apiRestMapper = new ApiRestMapper<>();
+		    String response = (String)restService.GET("/api/v1/voters/", params, String.class).getBody();
+		    cdrList = apiRestMapper.mapList(response, VoterDto.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return cdrList;
 	}
 
-//	@Override
-//	public NominatedDto getNominatedById(String userId) {
-//		return getNominateds().stream().filter(r -> r.getId().equals(userId)).findFirst().get();
-//	}
+	// @Override
+	// public CDRDto getCDRById(int userId) { // Originalmente era String
+	// 	return getCDRs().stream().filter(r -> r.getId().equals(userId)).findFirst().get();
+	// }
 
 	@Override
-	public void createVoter(VoterDto user) {
+    public VoterDto getVoterById(int idVoter) {
+        VoterDto cdr = null;
+
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<VoterDto> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/voters/" + "{idVoter}");
+            String uri = template.expand(idVoter).toString();
+            String response = (String) restService.GET(uri, params, String.class).getBody();
+            cdr = apiRestMapper.mapOne(response, VoterDto.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cdr;
+    }
+
+	@Override
+	public void createVoter(VoterDto voter) {
 		// TODO Auto-generated method stub
-		
+		restService.POST("/api/v1/voters/" + "", voter, String.class).getBody();
 	}
 
 	@Override
-	public void updateVoter(VoterDto user) {
+	public void updateVoter(VoterDto voter) {
 		// TODO Auto-generated method stub
-		
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        restService.PUT("/api/v1/voters/" + "", params, voter, String.class).getBody();
 	}
 
 	@Override
-	public void deleteVoter(String id) {
+	public void deleteVoter(int idVoter) { // Originalmente era String
 		// TODO Auto-generated method stub
-		
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        UriTemplate template = new UriTemplate("/api/v1/voters/" + "{idVoter}");
+        String uri = template.expand(idVoter).toString();
+        restService.DELETE(uri, params, String.class, null).getBody();
 	}
 	
 }

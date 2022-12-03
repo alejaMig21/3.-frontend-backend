@@ -18,7 +18,7 @@
 						</div>			
 					</h:panelGroup>
 					<h:panelGroup>
-						<h:form>
+						<!-- <h:form>
 							<div class="p-field">
 								<p:outputLabel>Colegio:</p:outputLabel>
 								<p:selectOneMenu class="test" id="option" required="true" value="#{selectOneMenuView.selectedOption}">
@@ -33,7 +33,32 @@
 					                 <f:selectItem itemLabel="Colegio #9" itemValue="Option3"/>
               					</p:selectOneMenu>
 							</div>
-						</h:form>
+						</h:form> -->
+						<div class="p-field">
+							<p:outputLabel
+							  for="@next"
+							  value= "Seleccione el Colegio"
+							/>
+							<p:selectOneMenu
+							  id="college"
+							  value="#{manageCDRBean.selectedCollegeName}"
+							  required="true"
+							  style="min-width: 15rem"
+							  multiple="true"
+							  filter="true"
+							  filterMatchMode="startsWith"
+							  panelStyle="width: 30rem"
+							  scrollHeight="250"
+							>
+							  <f:selectItems
+								value="#{manageCollegeBean.colleges}"
+								var="college"
+								itemLabel="#{college.nameCollege}"
+								itemValue="#{college.nameCollege}"
+							  />
+							</p:selectOneMenu>
+							<p:message for="@previous" />
+						  </div>
 						</h:panelGroup>
 				</p:panelGrid>
 			</p:outputPanel>

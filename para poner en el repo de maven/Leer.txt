@@ -1,0 +1,3 @@
+Sobrescribir esta carpeta en /repository/com/
+
+Nota: se hace esto para adicionar una nueva dependencia sin necesidad de descargar todo el repo.

@@ -65,7 +65,7 @@
 							action="#{manageCDRBean.deleteCDR}" >
 							<f:setPropertyActionListener value="#{cdr}"
 								target="#{manageCDRBean.selectedCDR}" />
-							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_delete_cdr}" icon="pi pi-exclamation-triangle"/>
+							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_deleted_cdr}" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
 
