@@ -77,11 +77,11 @@ public class VoterDto {
     this.adressVot = adrVot;
   }
 
-  public LocalDate getDateVot() {
+  public LocalDate getBirthdayVot() {
     return birthdayVot.toLocalDateTime().toLocalDate();
   }
 
-  public Timestamp getDateVot_() {
+  public Timestamp getBirthdayVot_() {
     return birthdayVot;
   }
 

@@ -37,6 +37,31 @@
 						<div class="p-field">
 							<p:outputLabel
 							  for="@next"
+							  value= "Seleccione el Presidente"
+							/>
+							<p:selectOneMenu
+							  id="voter"
+							  value="#{manageCDRBean.selectedVoterName}"
+							  required="true"
+							  style="min-width: 15rem"
+							  multiple="true"
+							  filter="true"
+							  filterMatchMode="startsWith"
+							  panelStyle="width: 30rem"
+							  scrollHeight="250"
+							>
+							  <f:selectItems
+								value="#{manageVoterBean.voters}"
+								var="voter"
+								itemLabel="#{voter.namVot}"
+								itemValue="#{voter.namVot}"
+							  />
+							</p:selectOneMenu>
+							<p:message for="@previous" />
+						  </div>
+						<div class="p-field">
+							<p:outputLabel
+							  for="@next"
 							  value= "Seleccione el Colegio"
 							/>
 							<p:selectOneMenu

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import cu.edu.cujae.pweb.dto.CDRDto;
 import cu.edu.cujae.pweb.service.CDRService;
+import cu.edu.cujae.pweb.service.CollegeService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 
 
@@ -128,6 +129,23 @@ public class ManageCDRBean {
     private List<CDRDto> cdrs;
     private CDRDto selectedCDR;
     private String selectedCollegeName;
+    private String selectedVoterName;
+
+    public String getSelectedVoterName() {
+        return this.selectedVoterName;
+    }
+
+    public void setSelectedVoterName(String selectedVoterName) {
+        this.selectedVoterName = selectedVoterName;
+    }
+
+    public CollegeService getCollegeService() {
+        return this.collegeService;
+    }
+
+    public void setCollegeService(CollegeService collegeService) {
+        this.collegeService = collegeService;
+    }
 
     public String getSelectedCollegeName() {
         return this.selectedCollegeName;
@@ -138,7 +156,9 @@ public class ManageCDRBean {
     }
 
     @Autowired
-    private CDRService service;
+    private CDRService cdrService;
+    @Autowired
+    private CollegeService collegeService;
 
     public ManageCDRBean() {
 
@@ -146,7 +166,7 @@ public class ManageCDRBean {
 
     @PostConstruct
     public void init() {
-        cdrs = service.getCDRs();
+        cdrs = cdrService.getCDRs();
     }
 
     public void openNew() {
@@ -158,17 +178,19 @@ public class ManageCDRBean {
     }
 
     public void saveCDR() {
+        selectedCDR.setId_college(collegeService.getIdByName(selectedCollegeName));
+
         if (this.selectedCDR.getCodCDR() == 0) {
-            service.createCDR(selectedCDR);
+            cdrService.createCDR(selectedCDR);
 
             JsfUtils.addInfoMessageFromBundle("message_inserted_cdr");
         } else {
-            service.updateCDR(selectedCDR);
+            cdrService.updateCDR(selectedCDR);
 
             JsfUtils.addInfoMessageFromBundle("message_updated_cdr");
         }
 
-        cdrs = service.getCDRs();
+        cdrs = cdrService.getCDRs();
 
         PrimeFaces.current().executeScript("PF('manageCDRDialog').hide()");
         PrimeFaces.current().ajax().update("form:dt-cdrs");
@@ -177,10 +199,10 @@ public class ManageCDRBean {
 
     public void deleteCDR() {
 
-        service.deleteCDR(selectedCDR.getCodCDR());
+        cdrService.deleteCDR(selectedCDR.getCodCDR());
         this.selectedCDR = null;
 
-        cdrs = service.getCDRs();
+        cdrs = cdrService.getCDRs();
 
         JsfUtils.addInfoMessageFromBundle("message_deleted_cdr");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-cdrs");
@@ -203,12 +225,12 @@ public class ManageCDRBean {
         this.selectedCDR = selectedCDR;
     }
 
-    public CDRService getService() {
-        return this.service;
+    public CDRService getCdrService() {
+        return this.cdrService;
     }
 
-    public void setService(CDRService service) {
-        this.service = service;
+    public void setCdrService(CDRService service) {
+        this.cdrService = service;
     }
 
 }

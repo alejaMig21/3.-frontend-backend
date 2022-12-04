@@ -110,7 +110,7 @@ public class VoterServiceImpl implements VoterService {
 
         CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
         statement.setString(1, voter.getNamVot());
-        statement.setTimestamp(2, voter.getDateVot_());
+        statement.setTimestamp(2, voter.getBirthdayVot_());
         statement.setString(3, voter.getAdrVot());
         statement.setInt(4, voter.getCdr());
         statement.execute();
