@@ -42,11 +42,11 @@ public class VoterController {
         return ResponseEntity.ok("Voter Created");
     }
    
-//   @PutMapping("")
-//    public ResponseEntity<String> update(@RequestBody VoterDto voter) throws SQLException {
-//      voterService.updateVoter(voter);
-//        return ResponseEntity.ok("Voter Updated");
-//    }
+  @PutMapping("")
+   public ResponseEntity<String> update(@RequestBody VoterDto voter) throws SQLException {
+     voterService.updateVoter(voter);
+       return ResponseEntity.ok("Voter Updated");
+   }
    
    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteVoter(@PathVariable int id) throws SQLException {

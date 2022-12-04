@@ -2,7 +2,9 @@ package cu.edu.cujae.pweb.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,27 @@ public class VoterServiceImpl implements VoterService{
             e.printStackTrace();
         }
         return cdr;
+    }
+
+	@Override
+    public int getIdByName(String voterName) {
+        VoterDto voter = null;
+
+        try {
+            String uri = "/api/v1/voters/" + "name/{name}";
+            Map<String, String> map = new HashMap<>();
+            map.put("name", voterName);
+
+            String response = (String) restService.GETEntity(
+                    uri, map,
+                    String.class).getBody();
+
+            ApiRestMapper<VoterDto> apiRestMapper = new ApiRestMapper<>();
+            voter = apiRestMapper.mapOne(response, VoterDto.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return voter.getNumID();
     }
 
 	@Override

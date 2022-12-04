@@ -54,4 +54,10 @@ public class CollegeController {
 		collegeService.deleteCollege(id);
         return ResponseEntity.ok("College deleted");
     }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Integer> getByName(@PathVariable String name) throws SQLException {
+        int id = collegeService.getIdByName(name);
+        return ResponseEntity.ok(id);
+    }
 }

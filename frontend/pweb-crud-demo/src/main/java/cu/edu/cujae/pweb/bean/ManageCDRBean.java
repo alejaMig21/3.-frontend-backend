@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import cu.edu.cujae.pweb.dto.CDRDto;
 import cu.edu.cujae.pweb.service.CDRService;
 import cu.edu.cujae.pweb.service.CollegeService;
+import cu.edu.cujae.pweb.service.VoterService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 
 ///------------------------------------------------------------------------------------
@@ -28,8 +29,8 @@ public class ManageCDRBean {
 
     private List<CDRDto> cdrs;
     private CDRDto selectedCDR;
-    private String selectedCollegeName;
-    private String selectedVoterName;
+    private String selectedCollegeName = "Default College";
+    private String selectedVoterName = "Default President";
 
     public String getSelectedVoterName() {
         return this.selectedVoterName;
@@ -59,6 +60,16 @@ public class ManageCDRBean {
     private CDRService cdrService;
     @Autowired
     private CollegeService collegeService;
+    @Autowired
+    private VoterService voterService;
+
+    public VoterService getVoterService() {
+        return this.voterService;
+    }
+
+    public void setVoterService(VoterService voterService) {
+        this.voterService = voterService;
+    }
 
     public ManageCDRBean() {
 
@@ -79,6 +90,8 @@ public class ManageCDRBean {
 
     public void saveCDR() {
         selectedCDR.setId_college(collegeService.getIdByName(selectedCollegeName));
+        selectedCDR.setId_presidentCDR(voterService.getIdByName(selectedVoterName));
+        System.out.println("El cod del CDR es " + selectedCDR.getCodCDR());
 
         if (this.selectedCDR.getCodCDR() == 0) {
             cdrService.createCDR(selectedCDR);

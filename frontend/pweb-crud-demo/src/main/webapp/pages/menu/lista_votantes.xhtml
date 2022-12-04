@@ -55,13 +55,13 @@
 						filterBy="#{voter.birthdayVot}">
 						<h:outputText value="#{voter.birthdayVot}" />
 					</p:column>
-					<p:column headerText="Voto" sortBy="#{voter.vote}"
+					<!-- <p:column headerText="Voto" sortBy="#{voter.vote}"
 						filterBy="#{voter.vote}">
 						<h:outputText value="#{voter.vote}" />
-					</p:column>
+					</p:column> -->
 					<p:column headerText="CDR" sortBy="#{voter.cdr}"
 						filterBy="#{voter.cdr}">
-						<h:outputText value="#{voter.cdr}" />
+						<h:outputText value="#{manageVoterBean.selectedCDRName}" />
 					</p:column>
 					<p:column exportable="false">
 						<p:commandButton icon="pi pi-pencil" action="#{manageVoterBean.openForEdit}"

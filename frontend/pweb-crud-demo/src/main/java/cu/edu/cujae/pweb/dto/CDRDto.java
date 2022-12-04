@@ -42,9 +42,9 @@ public class CDRDto {
 		this.namCDR = namCDR;
 	}
 	public int getId_presidentCDR() {
-		return id_presidentCDR;
+		return this.id_presidentCDR;
 	}
-	public void setNam_presidentCDR(int id_presidentCDR) {
+	public void setId_presidentCDR(int id_presidentCDR) {
 		this.id_presidentCDR = id_presidentCDR;
-	}	
+	}
 }

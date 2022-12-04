@@ -22,8 +22,32 @@
 						</div>
 						<div class="p-field">
 							<p:outputLabel>Direccion:</p:outputLabel>
-							<p:datePicker class="test" id="direccion" value="#{manageVoterBean.selectedVoter.addressVot}" showIcon="true" />
+							<p:inputText class="test" id="direccion" value="#{manageVoterBean.selectedVoter.addressVot}" showIcon="true" />
 						</div>
+					</h:panelGroup>
+					<h:panelGroup>
+						<div class="p-field">
+                        <p:outputLabel for="@next" value="CDR" />
+                        <p:selectOneMenu
+                          id="cdr"
+                          value="#{manageVoterBean.selectedCDRName}"
+                          required="true"
+                          style="min-width: 15rem"
+                          multiple="true"
+                          filter="true"
+                          filterMatchMode="startsWith"
+                          panelStyle="width: 30rem"
+                          scrollHeight="250"
+                        >
+                          <f:selectItems
+                            value="#{manageCDRBean.cdrs}"
+                            var="cdr"
+                            itemLabel="#{cdr.namCDR}"
+                            itemValue="#{cdr.namCDR}"
+                          />
+                        </p:selectOneMenu>
+                        <p:message for="@previous" />
+                      </div>
 					</h:panelGroup>
 				</p:panelGrid>
 			</p:outputPanel>

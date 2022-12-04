@@ -117,18 +117,19 @@ public class VoterServiceImpl implements VoterService {
         statement.execute();
    }
 
-//   @Override
-//   public void updateVoter(VoterDto voter) throws SQLException { // Originalmente este metodo actualizaba ademas de los valores del Dto su ID tambien
-//      String function = "{call update_voter(?,?,?,?)}";
-//
-//      CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
-//      statement.setString(1, voter.getNamVot());
-//      statement.setTimestamp(2, voter.getDateVot());
-//      statement.setString(3, voter.getAdrVot());
-//      statement.setInt(4, voter.getCdr());
-//      statement.execute();
-//
-//   }
+  @Override
+  public void updateVoter(VoterDto voter) throws SQLException { // Originalmente este metodo actualizaba ademas de los valores del Dto su ID tambien
+     String function = "{call update_voter(?,?,?,?,?)}";
+
+     CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
+     statement.setInt(1, voter.getNumID());
+     statement.setString(2, voter.getNamVot());
+     statement.setDate(3, voter.getBirthdayVot());
+     statement.setString(4, voter.getAddressVot());
+     statement.setInt(5, voter.getCdr());
+     statement.execute();
+
+  }
 
    @Override
    public void deleteVoter(int voterId) throws SQLException {
@@ -160,4 +161,27 @@ public class VoterServiceImpl implements VoterService {
 
    //    return nominated;
    // }
+
+   @Override
+   public int getIdByName(String voterName) throws SQLException {
+      VoterDto voter = null;
+
+      try (Connection connection = jdbcTemplate.getDataSource().getConnection()) {
+            PreparedStatement pstmt = connection.prepareStatement(
+                    "SELECT * FROM voter where name = ?");
+
+            pstmt.setString(1, voterName);
+
+            ResultSet resultSet = pstmt.executeQuery();
+
+            while (resultSet.next()) {
+                int id_voter = resultSet.getInt(1);
+
+                voter = new VoterDto();
+                voter.setNumID(id_voter);
+            }
+      }
+
+      return voter.getNumID();
+   }
 }

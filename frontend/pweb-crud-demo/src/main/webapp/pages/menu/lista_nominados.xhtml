@@ -44,12 +44,15 @@
 					</f:facet>
 					
 
-					<p:column headerText="Nombre" sortBy="#{nominated.namVot}" filterBy="#{nominated.namVot}">
+					<!-- <p:column headerText="Nombre" sortBy="#{nominated.namVot}" filterBy="#{nominated.namVot}">
 						<h:outputText value="#{nominated.namVot}" />
 					</p:column>
-					<p:column headerText="Direccion" sortBy="#{nominated.adressVot}"
+					<p:column headerText="Direccion" sortBy="#{nominated.addressVot}"
 						filterBy="#{nominated.adressVot}">
 						<h:outputText value="#{nominated.adressVot}" />
+					</p:column> -->
+					<p:column headerText="ID" sortBy="#{nominated.idNominated}">
+						<h:outputText value="#{nominated.idNominated}" />
 					</p:column>
 					<p:column headerText="Telefono" sortBy="#{nominated.phoneNomi}">
 						<h:outputText value="#{nominated.phoneNomi}" />
@@ -62,14 +65,19 @@
 						filterBy="#{nominated.profeNomi}">
 						<h:outputText value="#{nominated.profeNomi}" />
 					</p:column>
-					<p:column headerText="Fecha de Nac." sortBy="#{nominated.birthdayVot}"
+					<p:column headerText="Votos" sortBy="#{nominated.cantVotes}"
+						filterBy="#{nominated.cantVotes}">
+						<h:outputText value="#{nominated.cantVotes}" />
+					</p:column>
+					<!-- <p:column headerText="Fecha de Nac." sortBy="#{nominated.birthdayVot}"
 						filterBy="#{nominated.birthdayVot}">
 						<h:outputText value="#{nominated.birthdayVot}" />
 					</p:column>
 					<p:column headerText="CDR" sortBy="#{nominated.cdr}"
 						filterBy="#{nominated.cdr}">
 						<h:outputText value="#{nominated.cdr}" />
-					</p:column>
+					</p:column> -->
+					
 					<p:column exportable="false">
 						<p:commandButton icon="pi pi-pencil" action="#{manageNominatedBean.openForEdit}"
 							update=":form:manage-nominated-content"

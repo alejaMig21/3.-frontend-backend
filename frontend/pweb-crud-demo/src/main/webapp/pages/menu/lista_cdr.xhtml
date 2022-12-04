@@ -47,6 +47,12 @@
 					<p:column headerText="Nombre" sortBy="#{cdr.namCDR}" filterBy="#{cdr.namCDR}">
 						<h:outputText value="#{cdr.namCDR}" />
 					</p:column>
+					<p:column headerText="Colegio" sortBy="#{cdr.id_college}" filterBy="#{cdr.id_college}">
+						<h:outputText value="#{manageCDRBean.selectedCollegeName}" />
+					</p:column>
+					<p:column headerText="Presidente" sortBy="#{cdr.id_presidentCDR}" filterBy="#{cdr.id_presidentCDR}">
+						<h:outputText value="#{manageCDRBean.selectedVoterName}" />
+					</p:column>
 					
 					<!-- Hay que hacer la lista de Colegio Electoral -->
 					
