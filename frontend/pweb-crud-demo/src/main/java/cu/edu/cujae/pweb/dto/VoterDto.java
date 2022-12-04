@@ -14,6 +14,16 @@ public class VoterDto {
   private int vote;
   private String cause;
 
+  private int idNominatedVoted;
+
+  public int getIdNominatedVoted() {
+    return this.idNominatedVoted;
+  }
+
+  public void setIdNominatedVoted(int idNominatedVoted) {
+    this.idNominatedVoted = idNominatedVoted;
+  }
+
   public VoterDto() {
     super();
   }

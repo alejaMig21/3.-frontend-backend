@@ -58,17 +58,6 @@ public class NominatedServiceImpl implements NominatedService {
       ResultSet resultSet = (ResultSet) statement.getObject(1);
 
       while (resultSet.next()) {
-         // int id_nominated = resultSet.getInt(1); // parametro 6
-         // int id_voter = resultSet.getInt(2); // parametro 7
-         // String occupation = resultSet.getString(3); // parametro 1
-         // String profetion = resultSet.getString(4); // parametro 2
-         // String phone = resultSet.getString(5); // parametro 3
-         // String int_rev = resultSet.getString(6); // parametro 4
-         // String bio_data = resultSet.getString(7); // parametro 5
-         // int process_e = resultSet.getInt(8); // parametro 8
-         // int cant_vote = resultSet.getInt(9); // parametro 9
-
-         //NominatedDto dto = new NominatedDto(occupation, profetion, phone, int_rev, bio_data, id_nominated, id_voter, process_e, cant_vote);
          NominatedDto dto = createNewDto(resultSet);
          list.add(dto);
       }
@@ -88,21 +77,55 @@ public class NominatedServiceImpl implements NominatedService {
       ResultSet resultSet = pstmt.executeQuery();
 
       while (resultSet.next()) {
-         // int id_nominated = resultSet.getInt(1); // parametro 6
-         // int id_voter = resultSet.getInt(2); // parametro 7
-         // String occupation = resultSet.getString(3); // parametro 1
-         // String profetion = resultSet.getString(4); // parametro 2
-         // String phone = resultSet.getString(5); // parametro 3
-         // String int_rev = resultSet.getString(6); // parametro 4
-         // String bio_data = resultSet.getString(7); // parametro 5
-         // int process_e = resultSet.getInt(8); // parametro 8
-         // int cant_vote = resultSet.getInt(9); // parametro 9
-
-         // nominated = new NominatedDto(occupation, profetion, phone, int_rev, bio_data, id_nominated, id_voter, process_e, cant_vote);
          nominated = createNewDto(resultSet);
       }
 
       return nominated;
+   }
+
+   @Override
+   public int getIdByName(String nominatedName) throws SQLException { // Obtiene el id de voter que hay dentro de nominated
+      NominatedDto nominated = null;
+
+      PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
+                "SELECT * FROM voter where name = ?");
+
+      pstmt.setString(1, nominatedName);
+
+      ResultSet resultSet = pstmt.executeQuery();
+
+      nominated = new NominatedDto();
+
+      int id_voter = 0;
+      int idNom = 0;
+      while (resultSet.next()) {
+         id_voter = resultSet.getInt(1);
+
+         idNom = getIdNomByIdVot(id_voter); // Con el id voter obtenemos el id nominated
+      }
+
+      return idNom;
+   }
+
+   public int getIdNomByIdVot(int idVoter) throws SQLException {
+      NominatedDto nominated = null;
+
+      PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
+                "SELECT * FROM nominated where id_voter = ?");
+
+      pstmt.setInt(1, idVoter);
+
+      ResultSet resultSet = pstmt.executeQuery();
+
+      nominated = new NominatedDto();
+
+      while (resultSet.next()) {
+         int id_nominated = resultSet.getInt(1);
+
+         nominated.setIdNominated(id_nominated);
+      }
+
+      return nominated.getId();
    }
 
    @Override

@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cu.edu.cujae.pweb.dto.VoterDto;
+import cu.edu.cujae.pweb.service.CDRService;
+import cu.edu.cujae.pweb.service.NominatedService;
 import cu.edu.cujae.pweb.service.VoterService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 
@@ -29,6 +31,15 @@ public class ManageVoterBean {
     private List<VoterDto> voters;
     private VoterDto selectedVoter;
     private String selectedCDRName;
+    private String selectedNominatedName;
+
+    public String getSelectedNominatedName() {
+        return this.selectedNominatedName;
+    }
+
+    public void setSelectedNominatedName(String selectedNominatedName) {
+        this.selectedNominatedName = selectedNominatedName;
+    }
 
     public String getSelectedCDRName() {
         return this.selectedCDRName;
@@ -39,7 +50,29 @@ public class ManageVoterBean {
     }
 
     @Autowired
-    private VoterService service;
+    private VoterService voterService;
+
+    @Autowired
+    private CDRService cdrService;
+
+    public CDRService getCdrService() {
+        return this.cdrService;
+    }
+
+    public void setCdrService(CDRService cdrService) {
+        this.cdrService = cdrService;
+    }
+
+    public NominatedService getNominatedService() {
+        return this.nominatedService;
+    }
+
+    public void setNominatedService(NominatedService nominatedService) {
+        this.nominatedService = nominatedService;
+    }
+
+    @Autowired
+    private NominatedService nominatedService;
 
     public ManageVoterBean() {
 
@@ -47,7 +80,7 @@ public class ManageVoterBean {
 
     @PostConstruct
     public void init() {
-        voters = service.getVoters();
+        voters = voterService.getVoters();
     }
 
     public void openNew() {
@@ -59,17 +92,20 @@ public class ManageVoterBean {
     }
 
     public void saveCDR() {
+        selectedVoter.setCdr(cdrService.getIdByName(selectedCDRName));
+        selectedVoter.setIdNominatedVoted(nominatedService.getIdByName(selectedNominatedName));
+
         if (this.selectedVoter.getNumID() == 0) {
-            service.createVoter(selectedVoter);
+            voterService.createVoter(selectedVoter);
 
             JsfUtils.addInfoMessageFromBundle("message_inserted_voter");
         } else {
-            service.updateVoter(selectedVoter);
+            voterService.updateVoter(selectedVoter);
 
             JsfUtils.addInfoMessageFromBundle("message_updated_voter");
         }
 
-        voters = service.getVoters();
+        voters = voterService.getVoters();
 
         PrimeFaces.current().executeScript("PF('manageVoterDialog').hide()");
         PrimeFaces.current().ajax().update("form:dt-voters");
@@ -78,10 +114,10 @@ public class ManageVoterBean {
 
     public void deleteCDR() {
 
-        service.deleteVoter(selectedVoter.getNumID());
+        voterService.deleteVoter(selectedVoter.getNumID());
         this.selectedVoter = null;
 
-        voters = service.getVoters();
+        voters = voterService.getVoters();
 
         JsfUtils.addInfoMessageFromBundle("message_deleted_voter");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-voters");
@@ -104,12 +140,12 @@ public class ManageVoterBean {
         this.selectedVoter = selectedVoter;
     }
 
-    public VoterService getService() {
-        return this.service;
+    public VoterService getVoterService() {
+        return this.voterService;
     }
 
-    public void setService(VoterService service) {
-        this.service = service;
+    public void setVoterService(VoterService service) {
+        this.voterService = service;
     }
 
 }

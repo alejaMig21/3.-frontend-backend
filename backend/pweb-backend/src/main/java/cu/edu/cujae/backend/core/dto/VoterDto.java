@@ -18,7 +18,8 @@ public class VoterDto {
     super();
   }
 
-  public VoterDto(int numID, String namVot, String addressVot, Date birthdayVot, int cdr, int vote, String cause) {
+  public VoterDto(int numID, String namVot, String addressVot, 
+    Date birthdayVot, int cdr, int vote, String cause) {
     super();
     this.numID = numID;
     this.namVot = namVot;

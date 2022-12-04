@@ -2,7 +2,9 @@ package cu.edu.cujae.pweb.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +56,27 @@ public class NominatedServiceImpl implements NominatedService{
             e.printStackTrace();
         }
         return nominated;
+    }
+
+	@Override
+    public int getIdByName(String nominatedName) {
+        NominatedDto nominated = null;
+
+        try {
+            String uri = "/api/v1/nominateds/" + "name/{name}";
+            Map<String, String> map = new HashMap<>();
+            map.put("name", nominatedName);
+
+            String response = (String) restService.GETEntity(
+                    uri, map,
+                    String.class).getBody();
+
+            ApiRestMapper<NominatedDto> apiRestMapper = new ApiRestMapper<>();
+            nominated = apiRestMapper.mapOne(response, NominatedDto.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nominated.getIdNominated();
     }
 
 	@Override

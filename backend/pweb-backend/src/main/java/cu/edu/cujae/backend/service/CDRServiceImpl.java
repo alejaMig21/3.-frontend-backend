@@ -136,24 +136,26 @@ public class CDRServiceImpl implements CDRService {
 
    }
 
-   // ---------------------------> ESTE METODO SEGURO ES ALGO ESPECIFICO DE GIANFRANCO <---------------------------
-   // @Override
-   // public NominatedDto getNominatedByName(String nominatedName) throws SQLException {
-   //    NominatedDto nominated = null;
+   @Override
+   public int getIdByName(String cdrName) throws SQLException {
+      CDRDto cdr = null;
 
-   //    PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
-   //              "SELECT * FROM hotel_chain where chain_name = ?");
+      PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
+                "SELECT * FROM cdrdto where name_cdr = ?");
 
-   //    pstmt.setString(1, nominatedName);
+      pstmt.setString(1, cdrName);
 
-   //    ResultSet resultSet = pstmt.executeQuery();
+      ResultSet resultSet = pstmt.executeQuery();
 
-   //    while (resultSet.next()) {
-   //       int nominatedId = resultSet.getInt(2);
+      while (resultSet.next()) {
+         int cdrId = resultSet.getInt(1);
+         String namCDR = resultSet.getString(2);
+         int id_college = resultSet.getInt(3);
+         int id_presidentCDR = resultSet.getInt(4);
+         
+         cdr = new CDRDto(cdrId, namCDR, id_presidentCDR, id_college);
+      }
 
-   //       nominated = new NominatedDto(nominatedId, nominatedName);
-   //    }
-
-   //    return nominated;
-   // }
+      return cdr.getCodCDR();
+   }
 }

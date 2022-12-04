@@ -16,49 +16,14 @@
 								value="#{manageVoterBean.selectedVoter.namVot}" />
 							<p:message for="@previous" ></p:message>
 						</div>
-					</h:panelGroup>
-					<h:panelGroup>
 						<div class="p-field">
 							<p:outputLabel>Fecha de Nacimiento:</p:outputLabel>
-							<p:datePicker class="test" id="fecha_nac" value="#{calendarView.date7}" showIcon="true" />
+							<p:datePicker class="test" id="fecha_nac" value="#{manageVoterBean.selectedVoter.birthdayVot}" showIcon="true" />
 						</div>
-						<!-- <div class="p-field">
-                            <p:outputLabel for="@next">CDR:</p:outputLabel>
-                            <p:selectOneMenu id="cdr" class="test" required="true" label="Seleccione"
-                                             value="#{manageCDRBean.selectedCDR.namCDR}"
-                                             style="min-width: 15rem" multiple="true" filter="true"
-                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
-                                             scrollHeight="250">
-                                <f:selectItems value="#{manageCDRBean.cdrs}" var="cdr"
-                                               itemLabel="#{CDRDto.namCDR}" itemValue="#{CDRDto.namCDR}" />
-                            </p:selectOneMenu>
-                            <p:message for="@previous"></p:message>
-                        </div>	-->
 						<div class="p-field">
-							<p:outputLabel
-							  for="@next"
-							  value= "Seleccione el CDR"
-							/>
-							<p:selectOneMenu
-							  id="cdr"
-							  value="#{manageVoterBean.selectedCDRName}"
-							  required="true"
-							  style="min-width: 15rem"
-							  multiple="true"
-							  filter="true"
-							  filterMatchMode="startsWith"
-							  panelStyle="width: 30rem"
-							  scrollHeight="250"
-							>
-							  <f:selectItems
-								value="#{manageCDRBean.cdrs}"
-								var="cdr"
-								itemLabel="#{cdr.namCDR}"
-								itemValue="#{cdr.namCDR}"
-							  />
-							</p:selectOneMenu>
-							<p:message for="@previous" />
-						  </div>
+							<p:outputLabel>Direccion:</p:outputLabel>
+							<p:datePicker class="test" id="direccion" value="#{manageVoterBean.selectedVoter.addressVot}" showIcon="true" />
+						</div>
 					</h:panelGroup>
 				</p:panelGrid>
 			</p:outputPanel>

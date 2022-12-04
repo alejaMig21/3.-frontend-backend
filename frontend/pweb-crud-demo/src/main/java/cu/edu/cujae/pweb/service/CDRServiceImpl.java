@@ -2,7 +2,9 @@ package cu.edu.cujae.pweb.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import org.springframework.web.util.UriTemplate;
 import cu.edu.cujae.pweb.dto.CDRDto;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
+
+import java.util.Map;
 
 /* Esta anotiacioon le indica a spring que esta clase es un servicio y por tanto luego podr� inyectarse en otro lugar usando
  * @Autowired. En estas implementaciones luego se pondraan las llamadas al proyecto backend
@@ -60,6 +64,27 @@ public class CDRServiceImpl implements CDRService{
             e.printStackTrace();
         }
         return cdr;
+    }
+
+	@Override
+    public int getIdByName(String cdrName) {
+        CDRDto cdr = null;
+
+        try {
+            String uri = "/api/v1/cdrs/" + "name/{name}";
+            Map<String, String> map = new HashMap<>();
+            map.put("name", cdrName);
+
+            String response = (String) restService.GETEntity(
+                    uri, map,
+                    String.class).getBody();
+
+            ApiRestMapper<CDRDto> apiRestMapper = new ApiRestMapper<>();
+            cdr = apiRestMapper.mapOne(response, CDRDto.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cdr.getCodCDR();
     }
 
 	@Override

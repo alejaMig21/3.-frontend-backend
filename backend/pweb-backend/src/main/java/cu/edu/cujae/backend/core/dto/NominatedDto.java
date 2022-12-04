@@ -1,5 +1,7 @@
 package cu.edu.cujae.backend.core.dto;
 
+import java.sql.Date;
+
 public class NominatedDto extends VoterDto{
 	
 	private String ocupNomi;
@@ -40,7 +42,8 @@ public class NominatedDto extends VoterDto{
 		return idVoter;
 	}
 	public void setIdVoter(int idVoter) {
-		this.idVoter = idVoter;
+		//this.idVoter = idVoter; // Cambie esta linea por la de abajo
+		setNumID(idVoter);
 	}
 
 	public int getProcessE() {
