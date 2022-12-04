@@ -1,14 +1,15 @@
 package cu.edu.cujae.backend.core.dto;
 
 import java.time.LocalDate;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class VoterDto {
 
   private int numID;
   private String namVot;
-  private String adressVot;
-  private Timestamp birthdayVot;
+  private String addressVot;
+  private Date birthdayVot;
   private int cdr;
   private int vote;
   private String cause;
@@ -17,12 +18,11 @@ public class VoterDto {
     super();
   }
 
-  public VoterDto(int numID, String namVot, Timestamp birthdayVot, String adressVot, int cdr, int vote,
-      String cause) {
+  public VoterDto(int numID, String namVot, String addressVot, Date birthdayVot, int cdr, int vote, String cause) {
     super();
     this.numID = numID;
     this.namVot = namVot;
-    this.adressVot = adressVot;
+    this.addressVot = addressVot;
     this.birthdayVot = birthdayVot;
     this.cdr = cdr;
     this.vote = vote;
@@ -69,23 +69,23 @@ public class VoterDto {
     this.namVot = namVot;
   }
 
-  public String getAdrVot() {
-    return adressVot;
+  public String getAddressVot() {
+    return addressVot;
   }
 
-  public void setAdrVot(String adrVot) {
-    this.adressVot = adrVot;
+  public void setAddressVot(String adrVot) {
+    this.addressVot = adrVot;
   }
 
-  public LocalDate getBirthdayVot() {
-    return birthdayVot.toLocalDateTime().toLocalDate();
-  }
+  // public LocalDate getBirthdayVot() {
+  // return birthdayVot_.toLocalDateTime().toLocalDate();
+  // }
 
-  public Timestamp getBirthdayVot_() {
+  public Date getBirthdayVot() {
     return birthdayVot;
   }
 
-  public void setDateVot(Timestamp dateVot) {
+  public void setBirthdayVot(Date dateVot) {
     this.birthdayVot = dateVot;
   }
 

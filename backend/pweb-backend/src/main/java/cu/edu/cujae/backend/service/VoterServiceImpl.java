@@ -3,6 +3,7 @@ package cu.edu.cujae.backend.service;
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,13 +32,13 @@ public class VoterServiceImpl implements VoterService {
    public VoterDto createNewDto(ResultSet resultSet) throws SQLException {
       int numID = resultSet.getInt(1);
       String namVot = resultSet.getString(2); 
-      String adressVot = resultSet.getString(3);
-      Timestamp birthdayVot = resultSet.getTimestamp(4);
+      String addressVot = resultSet.getString(4);
+      Date birthdayVot = resultSet.getDate(3);
       String cause = resultSet.getString(5);
       int cdr = resultSet.getInt(6);
       int vote = resultSet.getInt(7);  	
 
-      return new VoterDto(numID, namVot, birthdayVot, adressVot, cdr, vote, cause);
+      return new VoterDto(numID, namVot, addressVot, birthdayVot, cdr, vote, cause);
    }
 
    @Override
@@ -110,8 +111,8 @@ public class VoterServiceImpl implements VoterService {
 
         CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
         statement.setString(1, voter.getNamVot());
-        statement.setTimestamp(2, voter.getBirthdayVot_());
-        statement.setString(3, voter.getAdrVot());
+        statement.setDate(2, voter.getBirthdayVot());
+        statement.setString(3, voter.getAddressVot());
         statement.setInt(4, voter.getCdr());
         statement.execute();
    }
