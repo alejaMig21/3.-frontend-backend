@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import cu.edu.cujae.pweb.dto.CDRDto;
 import cu.edu.cujae.pweb.dto.CollegeDto;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
+
+import java.util.Map;
 
 /* Esta anotiacioon le indica a spring que esta clase es un servicio y por tanto luego podr� inyectarse en otro lugar usando
  * @Autowired. En estas implementaciones luego se pondraan las llamadas al proyecto backend
@@ -60,6 +63,27 @@ public class CollegeServiceImpl implements CollegeService{
             e.printStackTrace();
         }
         return college;
+    }
+
+	@Override
+    public int getIdByName(String collegeName) {
+        CollegeDto college = null;
+
+        try {
+            String uri = "/api/v1/colleges/" + "name/{name}";
+            Map<String, String> map = new HashMap<>();
+            map.put("name", collegeName);
+
+            String response = (String) restService.GETEntity(
+                    uri, map,
+                    String.class).getBody();
+
+            ApiRestMapper<CollegeDto> apiRestMapper = new ApiRestMapper<>();
+            college = apiRestMapper.mapOne(response, CollegeDto.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return college.getId_college();
     }
 
 	@Override

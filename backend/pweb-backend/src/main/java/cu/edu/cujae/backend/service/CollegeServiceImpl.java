@@ -52,17 +52,6 @@ public class CollegeServiceImpl implements CollegeService {
       ResultSet resultSet = (ResultSet) statement.getObject(1);
 
       while (resultSet.next()) {
-         // int id_nominated = resultSet.getInt(1); // parametro 6
-         // int id_voter = resultSet.getInt(2); // parametro 7
-         // String occupation = resultSet.getString(3); // parametro 1
-         // String profetion = resultSet.getString(4); // parametro 2
-         // String phone = resultSet.getString(5); // parametro 3
-         // String int_rev = resultSet.getString(6); // parametro 4
-         // String bio_data = resultSet.getString(7); // parametro 5
-         // int process_e = resultSet.getInt(8); // parametro 8
-         // int cant_vote = resultSet.getInt(9); // parametro 9
-
-         //NominatedDto dto = new NominatedDto(occupation, profetion, phone, int_rev, bio_data, id_nominated, id_voter, process_e, cant_vote);
          CollegeDto dto = createNewDto(resultSet);
          list.add(dto);
       }
@@ -82,17 +71,6 @@ public class CollegeServiceImpl implements CollegeService {
       ResultSet resultSet = pstmt.executeQuery();
 
       while (resultSet.next()) {
-         // int id_nominated = resultSet.getInt(1); // parametro 6
-         // int id_voter = resultSet.getInt(2); // parametro 7
-         // String occupation = resultSet.getString(3); // parametro 1
-         // String profetion = resultSet.getString(4); // parametro 2
-         // String phone = resultSet.getString(5); // parametro 3
-         // String int_rev = resultSet.getString(6); // parametro 4
-         // String bio_data = resultSet.getString(7); // parametro 5
-         // int process_e = resultSet.getInt(8); // parametro 8
-         // int cant_vote = resultSet.getInt(9); // parametro 9
-
-         // nominated = new NominatedDto(occupation, profetion, phone, int_rev, bio_data, id_nominated, id_voter, process_e, cant_vote);
          college = createNewDto(resultSet);
       }
 
@@ -134,24 +112,53 @@ public class CollegeServiceImpl implements CollegeService {
 
    }
 
-   // ---------------------------> ESTE METODO SEGURO ES ALGO ESPECIFICO DE GIANFRANCO <---------------------------
    // @Override
-   // public NominatedDto getNominatedByName(String nominatedName) throws SQLException {
-   //    NominatedDto nominated = null;
+   // public CollegeDto getCollegeByName(String collegeName) throws SQLException {
+   //    CollegeDto college = null;
 
-   //    PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
-   //              "SELECT * FROM hotel_chain where chain_name = ?");
+   //    try (Connection connection = jdbcTemplate.getDataSource().getConnection()) {
+   //          PreparedStatement pstmt = connection.prepareStatement(
+   //                  "SELECT * FROM college where name_college = ?");
 
-   //    pstmt.setString(1, nominatedName);
+   //          pstmt.setString(1, collegeName);
 
-   //    ResultSet resultSet = pstmt.executeQuery();
+   //          ResultSet resultSet = pstmt.executeQuery();
 
-   //    while (resultSet.next()) {
-   //       int nominatedId = resultSet.getInt(2);
+   //          while (resultSet.next()) {
+   //              int id_college = resultSet.getInt(1);
+   //              String name_college = resultSet.getString(2);
+   //              String address = resultSet.getString(3);
+   //              int district = resultSet.getInt(4);
 
-   //       nominated = new NominatedDto(nominatedId, nominatedName);
+   //              college = new CollegeDto(id_college, name_college, address, district);
+   //          }
    //    }
 
-   //    return nominated;
+   //    return college;
    // }
+
+   @Override
+   public int getIdByName(String collegeName) throws SQLException {
+      CollegeDto college = null;
+
+      try (Connection connection = jdbcTemplate.getDataSource().getConnection()) {
+            PreparedStatement pstmt = connection.prepareStatement(
+                    "SELECT * FROM college where name_college = ?");
+
+            pstmt.setString(1, collegeName);
+
+            ResultSet resultSet = pstmt.executeQuery();
+
+            while (resultSet.next()) {
+                int id_college = resultSet.getInt(1);
+                String name_college = resultSet.getString(2);
+                String address = resultSet.getString(3);
+                int district = resultSet.getInt(4);
+
+                college = new CollegeDto(id_college, name_college, address, district);
+            }
+      }
+
+      return college.getId_college();
+   }
 }
