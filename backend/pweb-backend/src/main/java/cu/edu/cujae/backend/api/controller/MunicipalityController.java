@@ -24,7 +24,7 @@ public class MunicipalityController {
 	@Autowired
     private MunicipalityService municipalityService;
 
-  @GetMapping("")
+  @GetMapping("/")
   public ResponseEntity<List<MunicipalityDto>> getMunicipalitys() throws SQLException {
     List<MunicipalityDto> voterList = municipalityService.getMunicipalitys();
     return ResponseEntity.ok(voterList);
@@ -36,13 +36,13 @@ public class MunicipalityController {
       return ResponseEntity.ok(voter);
     }
    
-   @PostMapping("")
+   @PostMapping("/")
     public ResponseEntity<String> createMunicipality(@RequestBody MunicipalityDto voter) throws SQLException {
 	    municipalityService.createMunicipality(voter);
       return ResponseEntity.ok("Municipality Created");
     }
    
-   @PutMapping("")
+   @PutMapping("/")
     public ResponseEntity<String> updateMunicipality(@RequestBody MunicipalityDto voter) throws SQLException {
 	    municipalityService.updateMunicipality(voter);
       return ResponseEntity.ok("Municipality Updated");

@@ -34,7 +34,6 @@ public class CDRServiceImpl implements CDRService{
 	    try {
 	    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		    ApiRestMapper<CDRDto> apiRestMapper = new ApiRestMapper<>();
-			//params.add("name_cdr", "Rodolfo");
 		    String response = (String)restService.GET("/api/v1/cdrs/", params, String.class).getBody();
 		    cdrList = apiRestMapper.mapList(response, CDRDto.class);
 		} catch (IOException e) {

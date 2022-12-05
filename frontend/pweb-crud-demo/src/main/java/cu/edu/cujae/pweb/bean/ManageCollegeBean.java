@@ -28,7 +28,7 @@ public class ManageCollegeBean {
 
     private List<CollegeDto> colleges;
     private CollegeDto selectedCollege;
-    private String selectedDistrictName;
+    private String selectedDistrictName = "Default District";
 
     public List<CollegeDto> getColleges() {
         return this.colleges;

@@ -138,6 +138,7 @@ public class VoterServiceImpl implements VoterService {
 
                 voter = new VoterDto();
                 voter.setNumID(id_voter);
+                System.out.println("El id es " + voter.getNumID());
             }
       }
 
