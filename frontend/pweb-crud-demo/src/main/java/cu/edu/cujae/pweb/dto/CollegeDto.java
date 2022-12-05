@@ -4,17 +4,17 @@ package cu.edu.cujae.pweb.dto;
 
 public class CollegeDto {
 	
-	private int id_college;
+	private int idCollege;
 	private String nameCollege;
 	private String address;
 	private int district;
 
-	public int getId_college() {
-		return this.id_college;
+	public int getIdCollege() {
+		return this.idCollege;
 	}
 
-	public void setId_college(int id_college) {
-		this.id_college = id_college;
+	public void setIdCollege(int id_college) {
+		this.idCollege = id_college;
 	}
 
 	public String getNameCollege() {
@@ -46,7 +46,7 @@ public class CollegeDto {
 	}
 
 	public CollegeDto(int id_college, String name_college, String address, int district) {
-		this.id_college = id_college;
+		this.idCollege = id_college;
 		this.nameCollege = name_college;
 		this.address = address;
 		this.district = district;

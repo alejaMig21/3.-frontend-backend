@@ -1,8 +1,7 @@
 package cu.edu.cujae.pweb.dto;
 
-import java.time.LocalDate;
 import java.sql.Date;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class VoterDto {
 
@@ -13,16 +12,6 @@ public class VoterDto {
   private int cdr;
   private int vote;
   private String cause;
-
-  // private int idNominatedVoted;
-
-  // public int getIdNominatedVoted() {
-  //   return this.idNominatedVoted;
-  // }
-
-  // public void setIdNominatedVoted(int idNominatedVoted) {
-  //   this.idNominatedVoted = idNominatedVoted;
-  // }
 
   public VoterDto() {
     super();
@@ -86,10 +75,6 @@ public class VoterDto {
   public void setAddressVot(String adrVot) {
     this.addressVot = adrVot;
   }
-
-  // public LocalDate getBirthdayVot() {
-  // return birthdayVot_.toLocalDateTime().toLocalDate();
-  // }
 
   public Date getBirthdayVot() {
     return birthdayVot;

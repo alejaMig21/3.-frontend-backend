@@ -83,7 +83,7 @@ public class ManageCollegeBean {
     }
 
     public void saveCollege() {
-        if (this.selectedCollege.getId_college() == 0) {
+        if (this.selectedCollege.getIdCollege() == 0) {
             service.createCollege(selectedCollege);
 
             JsfUtils.addInfoMessageFromBundle("message_inserted_college");
@@ -102,7 +102,7 @@ public class ManageCollegeBean {
 
     public void deleteCollege() {
 
-        service.deleteCollege(selectedCollege.getId_college());
+        service.deleteCollege(selectedCollege.getIdCollege());
         this.selectedCollege = null;
 
         colleges = service.getColleges();

@@ -94,7 +94,7 @@ public class CollegeServiceImpl implements CollegeService {
       String function = "{call update_college(?,?,?,?)}";
 
       CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
-      statement.setInt(1, cdr.getId_college());
+      statement.setInt(1, cdr.getIdCollege());
       statement.setInt(2, cdr.getDistrict()); // Es el ID
       statement.setString(3, cdr.getNameCollege());
       statement.setString(4, cdr.getAddress());
@@ -150,15 +150,15 @@ public class CollegeServiceImpl implements CollegeService {
             ResultSet resultSet = pstmt.executeQuery();
 
             while (resultSet.next()) {
-                int id_college = resultSet.getInt(1);
-                String name_college = resultSet.getString(2);
-                String address = resultSet.getString(3);
-                int district = resultSet.getInt(4);
+               int id_college = resultSet.getInt(1);
+               String name_college = resultSet.getString(2);
+               String address = resultSet.getString(3);
+               int district = resultSet.getInt(4);
 
-                college = new CollegeDto(id_college, name_college, address, district);
+               college = new CollegeDto(id_college, name_college, address, district);
             }
       }
 
-      return college.getId_college();
+      return college.getIdCollege();
    }
 }

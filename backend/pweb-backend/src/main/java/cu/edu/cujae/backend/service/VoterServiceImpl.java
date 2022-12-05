@@ -12,6 +12,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.tomcat.websocket.server.UriTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class VoterServiceImpl implements VoterService {
       int numID = resultSet.getInt(1);
       String namVot = resultSet.getString(2); 
       String addressVot = resultSet.getString(4);
-      Date birthdayVot = resultSet.getDate(3);
+      /*Local*/Date birthdayVot = resultSet.getDate(3)/*.toLocalDate()*/;
       String cause = resultSet.getString(5);
       int cdr = resultSet.getInt(6);
       int vote = resultSet.getInt(7);  	
@@ -58,17 +60,6 @@ public class VoterServiceImpl implements VoterService {
       ResultSet resultSet = (ResultSet) statement.getObject(1);
 
       while (resultSet.next()) {
-         // int id_nominated = resultSet.getInt(1); // parametro 6
-         // int id_voter = resultSet.getInt(2); // parametro 7
-         // String occupation = resultSet.getString(3); // parametro 1
-         // String profetion = resultSet.getString(4); // parametro 2
-         // String phone = resultSet.getString(5); // parametro 3
-         // String int_rev = resultSet.getString(6); // parametro 4
-         // String bio_data = resultSet.getString(7); // parametro 5
-         // int process_e = resultSet.getInt(8); // parametro 8
-         // int cant_vote = resultSet.getInt(9); // parametro 9
-
-         //NominatedDto dto = new NominatedDto(occupation, profetion, phone, int_rev, bio_data, id_nominated, id_voter, process_e, cant_vote);
          VoterDto dto = createNewDto(resultSet);
          list.add(dto);
       }
@@ -112,7 +103,7 @@ public class VoterServiceImpl implements VoterService {
 
      CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
      statement.setInt(1, voter.getNumID());
-     statement.setString(2, voter.getNamVot());
+     statement.setString(2, voter.getNamVot());     
      statement.setDate(3, voter.getBirthdayVot());
      statement.setString(4, voter.getAddressVot());
      statement.setInt(5, voter.getCdr());

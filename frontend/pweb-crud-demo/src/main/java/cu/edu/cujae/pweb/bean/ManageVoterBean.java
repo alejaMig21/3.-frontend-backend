@@ -31,15 +31,6 @@ public class ManageVoterBean {
     private List<VoterDto> voters;
     private VoterDto selectedVoter;
     private String selectedCDRName = "Default CDR";
-    // private String selectedNominatedName;
-
-    // public String getSelectedNominatedName() {
-    //     return this.selectedNominatedName;
-    // }
-
-    // public void setSelectedNominatedName(String selectedNominatedName) {
-    //     this.selectedNominatedName = selectedNominatedName;
-    // }
 
     public String getSelectedCDRName() {
         return this.selectedCDRName;
@@ -93,13 +84,10 @@ public class ManageVoterBean {
 
     public void saveVoter() {
         selectedVoter.setCdr(cdrService.getIdByName(selectedCDRName));
-        System.out.println("000000000000000000000000000    " + selectedVoter.getCdr() + "    0000000000000000000000000000000");
         //selectedVoter.setIdNominatedVoted(nominatedService.getIdByName(selectedNominatedName));
 
         if (this.selectedVoter.getNumID() == 0) {
-            selectedVoter.setCause("");
-            selectedVoter.setVote(0);
-            
+            System.out.println("000000000000000000000000000    " + selectedVoter.getCdr() + "    0000000000000000000000000000000");           
             voterService.createVoter(selectedVoter);
 
             JsfUtils.addInfoMessageFromBundle("message_inserted_voter");

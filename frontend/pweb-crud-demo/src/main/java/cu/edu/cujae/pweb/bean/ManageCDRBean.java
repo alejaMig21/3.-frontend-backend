@@ -91,7 +91,6 @@ public class ManageCDRBean {
     public void saveCDR() {
         selectedCDR.setId_college(collegeService.getIdByName(selectedCollegeName));
         selectedCDR.setId_presidentCDR(voterService.getIdByName(selectedVoterName));
-        System.out.println("El cod del CDR es " + selectedCDR.getCodCDR());
 
         if (this.selectedCDR.getCodCDR() == 0) {
             cdrService.createCDR(selectedCDR);

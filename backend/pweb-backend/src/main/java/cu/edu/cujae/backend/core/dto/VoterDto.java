@@ -1,8 +1,7 @@
 package cu.edu.cujae.backend.core.dto;
 
-import java.time.LocalDate;
 import java.sql.Date;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class VoterDto {
 
@@ -77,10 +76,6 @@ public class VoterDto {
   public void setAddressVot(String adrVot) {
     this.addressVot = adrVot;
   }
-
-  // public LocalDate getBirthdayVot() {
-  // return birthdayVot_.toLocalDateTime().toLocalDate();
-  // }
 
   public Date getBirthdayVot() {
     return birthdayVot;

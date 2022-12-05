@@ -39,14 +39,14 @@ public class CollegeController {
 	@PostMapping("/")
     public ResponseEntity<String> createCollege(@RequestBody CollegeDto college) throws SQLException {
 		collegeService.createCollege(college);
-        return ResponseEntity.ok("College Created");
+        return ResponseEntity.ok("College created");
     }
 	
 	@PutMapping("/")
     public ResponseEntity<String> updateCollege(@RequestBody CollegeDto college) throws SQLException {
 		//TODO code for update
         collegeService.updateCollege(college);
-        return ResponseEntity.ok("College pdated");
+        return ResponseEntity.ok("College updated");
     }
 	
 	@DeleteMapping("/{id}")
