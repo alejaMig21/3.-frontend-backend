@@ -24,7 +24,7 @@ public class NominatedsController {
 	@Autowired
     private NominatedService nominatedService;
 
-  @GetMapping("")
+  @GetMapping("/")
   public ResponseEntity<List<NominatedDto>> getNominateds() throws SQLException {
     List<NominatedDto> nominatedList = nominatedService.listNominateds();
       return ResponseEntity.ok(nominatedList);
@@ -36,13 +36,13 @@ public class NominatedsController {
         return ResponseEntity.ok(nominated);
     }
    
-   @PostMapping("")
+   @PostMapping("/")
     public ResponseEntity<String> createNominated(@RequestBody NominatedDto nominated) throws SQLException {
       nominatedService.createNominated(nominated);
         return ResponseEntity.ok("Nominated Created");
     }
    
-   @PutMapping("")
+   @PutMapping("/")
     public ResponseEntity<String> updateNominated(@RequestBody NominatedDto nominated) throws SQLException {
       nominatedService.updateNominated(nominated);
         return ResponseEntity.ok("Nominated Updated");

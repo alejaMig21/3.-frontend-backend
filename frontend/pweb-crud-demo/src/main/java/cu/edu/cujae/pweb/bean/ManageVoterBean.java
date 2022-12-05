@@ -91,8 +91,9 @@ public class ManageVoterBean {
 
     }
 
-    public void saveCDR() {
+    public void saveVoter() {
         selectedVoter.setCdr(cdrService.getIdByName(selectedCDRName));
+        System.out.println("000000000000000000000000000    " + selectedVoter.getCdr() + "    0000000000000000000000000000000");
         //selectedVoter.setIdNominatedVoted(nominatedService.getIdByName(selectedNominatedName));
 
         if (this.selectedVoter.getNumID() == 0) {
@@ -115,7 +116,7 @@ public class ManageVoterBean {
 
     }
 
-    public void deleteCDR() {
+    public void deleteVoter() {
 
         voterService.deleteVoter(selectedVoter.getNumID());
         this.selectedVoter = null;

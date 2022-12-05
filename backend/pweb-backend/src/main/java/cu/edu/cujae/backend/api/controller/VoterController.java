@@ -24,7 +24,7 @@ public class VoterController {
 	@Autowired
     private VoterService voterService;
 
-  @GetMapping("")
+  @GetMapping("/")
   public ResponseEntity<List<VoterDto>> getVoters() throws SQLException {
     List<VoterDto> voterList = voterService.listVoters();
       return ResponseEntity.ok(voterList);
@@ -36,13 +36,13 @@ public class VoterController {
         return ResponseEntity.ok(voter);
     }
    
-   @PostMapping("")
+   @PostMapping("/")
     public ResponseEntity<String> createVoter(@RequestBody VoterDto voter) throws SQLException {
       voterService.createVoter(voter);
         return ResponseEntity.ok("Voter Created");
     }
    
-  @PutMapping("")
+  @PutMapping("/")
    public ResponseEntity<String> update(@RequestBody VoterDto voter) throws SQLException {
      voterService.updateVoter(voter);
        return ResponseEntity.ok("Voter Updated");
@@ -52,5 +52,11 @@ public class VoterController {
     public ResponseEntity<String> deleteVoter(@PathVariable int id) throws SQLException {
       voterService.deleteVoter(id);
         return ResponseEntity.ok("Voter Deleted");
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Integer> getByName(@PathVariable String name) throws SQLException {
+        int id = voterService.getIdByName(name);
+        return ResponseEntity.ok(id);
     }
 }

@@ -61,9 +61,30 @@ public class VoterServiceImpl implements VoterService{
         return cdr;
     }
 
+	// @Override
+    // public int getIdByName(String voterName) {
+    //     VoterDto voter = null;
+
+    //     try {
+    //         String uri = "/api/v1/voters/" + "name/{name}";
+    //         Map<String, String> map = new HashMap<>();
+    //         map.put("name", voterName);
+
+    //         String response = (String) restService.GETEntity(
+    //                 uri, map,
+    //                 String.class).getBody();
+
+    //         ApiRestMapper<VoterDto> apiRestMapper = new ApiRestMapper<>();
+    //         voter = apiRestMapper.mapOne(response, VoterDto.class);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    //     return voter.getNumID();
+    // }
+
 	@Override
     public int getIdByName(String voterName) {
-        VoterDto voter = null;
+        int idVoter = 0;
 
         try {
             String uri = "/api/v1/voters/" + "name/{name}";
@@ -74,12 +95,11 @@ public class VoterServiceImpl implements VoterService{
                     uri, map,
                     String.class).getBody();
 
-            ApiRestMapper<VoterDto> apiRestMapper = new ApiRestMapper<>();
-            voter = apiRestMapper.mapOne(response, VoterDto.class);
+            idVoter = Integer.parseInt(response);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return voter.getNumID();
+        return idVoter;
     }
 
 	@Override

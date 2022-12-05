@@ -68,7 +68,7 @@ public class CDRServiceImpl implements CDRService{
 
 	@Override
     public int getIdByName(String cdrName) {
-        CDRDto cdr = null;
+        int idCdr = 0;
 
         try {
             String uri = "/api/v1/cdrs/" + "name/{name}";
@@ -79,12 +79,11 @@ public class CDRServiceImpl implements CDRService{
                     uri, map,
                     String.class).getBody();
 
-            ApiRestMapper<CDRDto> apiRestMapper = new ApiRestMapper<>();
-            cdr = apiRestMapper.mapOne(response, CDRDto.class);
+            idCdr = Integer.parseInt(response);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return cdr.getCodCDR();
+        return idCdr;
     }
 
 	@Override

@@ -54,4 +54,10 @@ public class CDRController {
 		cdrService.deleteCDR(id);
         return ResponseEntity.ok("CDR deleted");
     }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Integer> getByName(@PathVariable String name) throws SQLException {
+        int id = cdrService.getIdByName(name);
+        return ResponseEntity.ok(id);
+    }
 }

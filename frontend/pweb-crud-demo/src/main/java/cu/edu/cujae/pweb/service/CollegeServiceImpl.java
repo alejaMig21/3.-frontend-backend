@@ -64,9 +64,30 @@ public class CollegeServiceImpl implements CollegeService{
         return college;
     }
 
+	// @Override
+    // public int getIdByName(String collegeName) {
+    //     CollegeDto college = null;
+
+    //     try {
+    //         String uri = "/api/v1/colleges/" + "name/{name}";
+    //         Map<String, String> map = new HashMap<>();
+    //         map.put("name", collegeName);
+
+    //         String response = (String) restService.GETEntity(
+    //                 uri, map,
+    //                 String.class).getBody();
+
+    //         ApiRestMapper<CollegeDto> apiRestMapper = new ApiRestMapper<>();
+    //         college = apiRestMapper.mapOne(response, CollegeDto.class);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    //     return college.getId_college();
+    // }
+
 	@Override
     public int getIdByName(String collegeName) {
-        CollegeDto college = null;
+        int idCollege = 0;
 
         try {
             String uri = "/api/v1/colleges/" + "name/{name}";
@@ -77,12 +98,11 @@ public class CollegeServiceImpl implements CollegeService{
                     uri, map,
                     String.class).getBody();
 
-            ApiRestMapper<CollegeDto> apiRestMapper = new ApiRestMapper<>();
-            college = apiRestMapper.mapOne(response, CollegeDto.class);
+            idCollege = Integer.parseInt(response);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return college.getId_college();
+        return idCollege;
     }
 
 	@Override
