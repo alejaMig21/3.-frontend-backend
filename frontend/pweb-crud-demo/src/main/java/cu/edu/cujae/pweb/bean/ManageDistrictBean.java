@@ -9,6 +9,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
+
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+
 import javax.faces.context.FacesContext;
 
 import org.primefaces.PrimeFaces;
@@ -17,8 +20,8 @@ import org.springframework.stereotype.Component;
 
 import cu.edu.cujae.pweb.dto.DistrictDto;
 import cu.edu.cujae.pweb.service.DistrictService;
+import cu.edu.cujae.pweb.service.MunicipalityService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
-
 
 @Component
 @ManagedBean
@@ -28,7 +31,7 @@ public class ManageDistrictBean {
     private List<DistrictDto> districts;
     private DistrictDto selectedDistrict;
     private String selectedCollegeName;
-    private String selectedMunicipalityName;
+    private String selectedMunicipalityName = "Default";
 
     public String getSelectedMunicipalityName() {
         return this.selectedMunicipalityName;
@@ -47,7 +50,10 @@ public class ManageDistrictBean {
     }
 
     @Autowired
-    private DistrictService service;
+    private DistrictService districtService;
+
+    @Autowired
+    private MunicipalityService municipalityService;
 
     public ManageDistrictBean() {
 
@@ -55,7 +61,7 @@ public class ManageDistrictBean {
 
     @PostConstruct
     public void init() {
-        districts = service.getDistricts();
+        districts = districtService.getDistricts();
     }
 
     public void openNew() {
@@ -66,30 +72,31 @@ public class ManageDistrictBean {
 
     }
 
-    public void saveCDR() {
+    public void saveDistrict() {
+        selectedDistrict.setIdMunicipality(municipalityService.getIdByName(selectedMunicipalityName));
         if (this.selectedDistrict.getCodDis() == 0) {
-            service.createDistrict(selectedDistrict);
+            districtService.createDistrict(selectedDistrict);
 
             JsfUtils.addInfoMessageFromBundle("message_inserted_district");
         } else {
-            service.updateDistrict(selectedDistrict);
+            districtService.updateDistrict(selectedDistrict);
 
             JsfUtils.addInfoMessageFromBundle("message_updated_district");
         }
 
-        districts = service.getDistricts();
+        districts = districtService.getDistricts();
 
         PrimeFaces.current().executeScript("PF('manageDistrictDialog').hide()");
         PrimeFaces.current().ajax().update("form:dt-districts");
 
     }
 
-    public void deleteCDR() {
+    public void deleteDistrict() {
 
-        service.deleteDistrict(selectedDistrict.getCodDis());
+        districtService.deleteDistrict(selectedDistrict.getCodDis());
         this.selectedDistrict = null;
 
-        districts = service.getDistricts();
+        districts = districtService.getDistricts();
 
         JsfUtils.addInfoMessageFromBundle("message_deleted_district");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-districts");
@@ -112,12 +119,20 @@ public class ManageDistrictBean {
         this.selectedDistrict = selectedDistrictService;
     }
 
-    public DistrictService getService() {
-        return this.service;
+    public DistrictService getDistrictService() {
+        return this.districtService;
     }
 
-    public void setService(DistrictService service) {
-        this.service = service;
+    public void setDistrictService(DistrictService service) {
+        this.districtService = service;
+    }
+
+    public MunicipalityService getMunicipalityService() {
+        return this.municipalityService;
+    }
+
+    public void setMunicipalityService(MunicipalityService municipalityService) {
+        this.municipalityService = municipalityService;
     }
 
 }

@@ -35,7 +35,7 @@ public class VoterServiceImpl implements VoterService {
       int numID = resultSet.getInt(1);
       String namVot = resultSet.getString(2); 
       String addressVot = resultSet.getString(4);
-      /*Local*/Date birthdayVot = resultSet.getDate(3)/*.toLocalDate()*/;
+      LocalDate birthdayVot = resultSet.getDate(3).toLocalDate();
       String cause = resultSet.getString(5);
       int cdr = resultSet.getInt(6);
       int vote = resultSet.getInt(7);  	
@@ -91,7 +91,7 @@ public class VoterServiceImpl implements VoterService {
 
         CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
         statement.setString(1, voter.getNamVot());
-        statement.setDate(2, voter.getBirthdayVot());
+        statement.setDate(2, Date.valueOf(voter.getBirthdayVot()));
         statement.setString(3, voter.getAddressVot());
         statement.setInt(4, voter.getCdr());
         statement.execute();
@@ -104,7 +104,7 @@ public class VoterServiceImpl implements VoterService {
      CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
      statement.setInt(1, voter.getNumID());
      statement.setString(2, voter.getNamVot());     
-     statement.setDate(3, voter.getBirthdayVot());
+     statement.setDate(3, Date.valueOf(voter.getBirthdayVot()));
      statement.setString(4, voter.getAddressVot());
      statement.setInt(5, voter.getCdr());
      statement.execute();

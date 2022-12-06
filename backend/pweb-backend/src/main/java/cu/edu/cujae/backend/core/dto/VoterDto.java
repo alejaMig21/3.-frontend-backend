@@ -1,6 +1,5 @@
 package cu.edu.cujae.backend.core.dto;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class VoterDto {
@@ -8,7 +7,7 @@ public class VoterDto {
   private int numID;
   private String namVot;
   private String addressVot;
-  private Date birthdayVot;
+  private LocalDate birthdayVot;
   private int cdr;
   private int vote;
   private String cause;
@@ -18,7 +17,7 @@ public class VoterDto {
   }
 
   public VoterDto(int numID, String namVot, String addressVot, 
-    Date birthdayVot, int cdr, int vote, String cause) {
+    LocalDate birthdayVot, int cdr, int vote, String cause) {
     super();
     this.numID = numID;
     this.namVot = namVot;
@@ -77,11 +76,11 @@ public class VoterDto {
     this.addressVot = adrVot;
   }
 
-  public Date getBirthdayVot() {
+  public LocalDate getBirthdayVot() {
     return birthdayVot;
   }
 
-  public void setBirthdayVot(Date dateVot) {
+  public void setBirthdayVot(LocalDate dateVot) {
     this.birthdayVot = dateVot;
   }
 

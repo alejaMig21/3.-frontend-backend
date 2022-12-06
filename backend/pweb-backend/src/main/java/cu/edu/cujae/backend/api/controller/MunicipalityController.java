@@ -21,8 +21,8 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RequestMapping("/api/v1/municipalities")
 public class MunicipalityController {
 
-	@Autowired
-    private MunicipalityService municipalityService;
+  @Autowired
+  private MunicipalityService municipalityService;
 
   @GetMapping("/")
   public ResponseEntity<List<MunicipalityDto>> getMunicipalitys() throws SQLException {
@@ -30,27 +30,33 @@ public class MunicipalityController {
     return ResponseEntity.ok(voterList);
   }
 
-	@GetMapping("/{id}")
-    public ResponseEntity<MunicipalityDto> getMunicipalityById(@PathVariable int id) throws SQLException {
-		MunicipalityDto voter = municipalityService.getMunicipalityById(id);
-      return ResponseEntity.ok(voter);
-    }
-   
-   @PostMapping("/")
-    public ResponseEntity<String> createMunicipality(@RequestBody MunicipalityDto voter) throws SQLException {
-	    municipalityService.createMunicipality(voter);
-      return ResponseEntity.ok("Municipality Created");
-    }
-   
-   @PutMapping("/")
-    public ResponseEntity<String> updateMunicipality(@RequestBody MunicipalityDto voter) throws SQLException {
-	    municipalityService.updateMunicipality(voter);
-      return ResponseEntity.ok("Municipality Updated");
-    }
-   
-   @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteMunicipality(@PathVariable int id) throws SQLException {
-	    municipalityService.deleteMunicipality(id);
-      return ResponseEntity.ok("Municipality Deleted");
-    }
+  @GetMapping("/{id}")
+  public ResponseEntity<MunicipalityDto> getMunicipalityById(@PathVariable int id) throws SQLException {
+    MunicipalityDto voter = municipalityService.getMunicipalityById(id);
+    return ResponseEntity.ok(voter);
+  }
+
+  @PostMapping("/")
+  public ResponseEntity<String> createMunicipality(@RequestBody MunicipalityDto voter) throws SQLException {
+    municipalityService.createMunicipality(voter);
+    return ResponseEntity.ok("Municipality Created");
+  }
+
+  @PutMapping("/")
+  public ResponseEntity<String> updateMunicipality(@RequestBody MunicipalityDto voter) throws SQLException {
+    municipalityService.updateMunicipality(voter);
+    return ResponseEntity.ok("Municipality Updated");
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteMunicipality(@PathVariable int id) throws SQLException {
+    municipalityService.deleteMunicipality(id);
+    return ResponseEntity.ok("Municipality Deleted");
+  }
+
+  @GetMapping("/name/{name}")
+  public ResponseEntity<Integer> getByName(@PathVariable String name) throws SQLException {
+    int id = municipalityService.getIdByName(name);
+    return ResponseEntity.ok(id);
+  }
 }

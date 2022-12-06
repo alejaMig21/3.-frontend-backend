@@ -38,8 +38,8 @@ public class MunicipalityServiceImpl implements MunicipalityService {
    public List<MunicipalityDto> getMunicipalitys() throws SQLException { // Aparentemente esta funcion ya esta
       List<MunicipalityDto> list = new ArrayList<>();
 
-      //String function = "{?= call select_all_nominateds()}";
-      //String function = "{SELECT * FROM municipality = ?}";
+      // String function = "{?= call select_all_nominateds()}";
+      // String function = "{SELECT * FROM municipality = ?}";
       String function = "{?= call read_list_municipality()}";
 
       Connection connection = jdbcTemplate.getDataSource().getConnection();
@@ -51,7 +51,7 @@ public class MunicipalityServiceImpl implements MunicipalityService {
       ResultSet resultSet = (ResultSet) statement.getObject(1);
 
       while (resultSet.next()) {
-    	  MunicipalityDto dto = createNewDto(resultSet);
+         MunicipalityDto dto = createNewDto(resultSet);
          list.add(dto);
       }
 
@@ -60,35 +60,38 @@ public class MunicipalityServiceImpl implements MunicipalityService {
 
    @Override
    public MunicipalityDto getMunicipalityById(int municipalityId) throws SQLException {
-	   MunicipalityDto municipality = null;
+      MunicipalityDto municipality = null;
 
       PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
-                "SELECT * FROM municipality where id_municipality = ?");
+            "SELECT * FROM municipality where id_municipality = ?");
 
       pstmt.setInt(1, municipalityId);
 
       ResultSet resultSet = pstmt.executeQuery();
 
       while (resultSet.next()) {
-    	  municipality = createNewDto(resultSet);
+         municipality = createNewDto(resultSet);
       }
 
       return municipality;
    }
 
    @Override
-   public void createMunicipality(MunicipalityDto municipality) throws SQLException { // Originalmente aqui no se creaba el ID
-        String function = "{call create_municipality(?)}";
+   public void createMunicipality(MunicipalityDto municipality) throws SQLException { // Originalmente aqui no se creaba
+                                                                                      // el ID
+      String function = "{call create_municipality(?)}";
 
-        CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
-        //statement.setInt(1, municipality.getCodMun());
-        statement.setString(1, municipality.getNameMunicipality());
-        statement.execute();
+      CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
+      // statement.setInt(1, municipality.getCodMun());
+      statement.setString(1, municipality.getNameMunicipality());
+      statement.execute();
 
    }
 
    @Override
-   public void updateMunicipality(MunicipalityDto municipality) throws SQLException { // Originalmente este metodo actualizaba ademas de los valores del Dto su ID tambien
+   public void updateMunicipality(MunicipalityDto municipality) throws SQLException { // Originalmente este metodo
+                                                                                      // actualizaba ademas de los
+                                                                                      // valores del Dto su ID tambien
       String function = "{call update_municipality(?,?)}";
 
       CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
@@ -103,30 +106,31 @@ public class MunicipalityServiceImpl implements MunicipalityService {
       String function = "{call delete_municipality(?)}";
 
       CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
-      //statement.setInt(1, nominatedId); <------ Linea original
+      // statement.setInt(1, nominatedId); <------ Linea original
       statement.setInt(1, municipalityId);
       statement.execute();
 
    }
 
-   // ---------------------------> ESTE METODO SEGURO ES ALGO ESPECIFICO DE GIANFRANCO <---------------------------
-   // @Override
-   // public NominatedDto getNominatedByName(String nominatedName) throws SQLException {
-   //    NominatedDto nominated = null;
+   @Override
+   public int getIdByName(String municipalityName) throws SQLException {
+      MunicipalityDto municipality = null;
 
-   //    PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
-   //              "SELECT * FROM hotel_chain where chain_name = ?");
+      PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
+            "SELECT * FROM municipality where name = ?");
 
-   //    pstmt.setString(1, nominatedName);
+      pstmt.setString(1, municipalityName);
 
-   //    ResultSet resultSet = pstmt.executeQuery();
+      ResultSet resultSet = pstmt.executeQuery();
 
-   //    while (resultSet.next()) {
-   //       int nominatedId = resultSet.getInt(2);
+      while (resultSet.next()) {
+         int municipalityId = resultSet.getInt(1);
 
-   //       nominated = new NominatedDto(nominatedId, nominatedName);
-   //    }
+         municipality = new MunicipalityDto();
+         municipality.setCodMun(municipalityId);
+         ;
+      }
 
-   //    return nominated;
-   // }
+      return municipality.getCodMun();
+   }
 }

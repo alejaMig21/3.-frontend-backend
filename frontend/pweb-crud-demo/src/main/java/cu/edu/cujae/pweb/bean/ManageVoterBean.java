@@ -1,10 +1,8 @@
 package cu.edu.cujae.pweb.bean;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
+import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.annotation.PostConstruct;
 //import javax.annotation.PostConstruct;
@@ -31,6 +29,15 @@ public class ManageVoterBean {
     private List<VoterDto> voters;
     private VoterDto selectedVoter;
     private String selectedCDRName = "Default CDR";
+    private LocalDate selectedDate;
+
+    public LocalDate getSelectedDate() {
+        return this.selectedDate;
+    }
+
+    public void setSelectedDate(LocalDate selectedDate) {
+        this.selectedDate = selectedDate;
+    }
 
     public String getSelectedCDRName() {
         return this.selectedCDRName;
@@ -85,6 +92,8 @@ public class ManageVoterBean {
     public void saveVoter() {
         selectedVoter.setCdr(cdrService.getIdByName(selectedCDRName));
         //selectedVoter.setIdNominatedVoted(nominatedService.getIdByName(selectedNominatedName));
+        // Date auxDate = Date.valueOf(selectedDate.toString());
+        // selectedVoter.setBirthdayVot(auxDate.toLocalDate());
 
         if (this.selectedVoter.getNumID() == 0) {
             System.out.println("000000000000000000000000000    " + selectedVoter.getCdr() + "    0000000000000000000000000000000");           
