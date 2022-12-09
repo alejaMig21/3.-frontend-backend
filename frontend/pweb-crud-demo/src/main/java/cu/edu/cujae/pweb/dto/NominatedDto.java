@@ -1,6 +1,6 @@
 package cu.edu.cujae.pweb.dto;
 
-public class NominatedDto extends VoterDto{
+public class NominatedDto /*extends VoterDto*/ {
 	
 	private String ocupNomi;
 	private String profeNomi;

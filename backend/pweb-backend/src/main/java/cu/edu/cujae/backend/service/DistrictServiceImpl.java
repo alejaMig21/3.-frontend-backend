@@ -54,17 +54,6 @@ public class DistrictServiceImpl implements DistrictService {
       ResultSet resultSet = (ResultSet) statement.getObject(1);
 
       while (resultSet.next()) {
-         // int id_nominated = resultSet.getInt(1); // parametro 6
-         // int id_voter = resultSet.getInt(2); // parametro 7
-         // String occupation = resultSet.getString(3); // parametro 1
-         // String profetion = resultSet.getString(4); // parametro 2
-         // String phone = resultSet.getString(5); // parametro 3
-         // String int_rev = resultSet.getString(6); // parametro 4
-         // String bio_data = resultSet.getString(7); // parametro 5
-         // int process_e = resultSet.getInt(8); // parametro 8
-         // int cant_vote = resultSet.getInt(9); // parametro 9
-
-         //NominatedDto dto = new NominatedDto(occupation, profetion, phone, int_rev, bio_data, id_nominated, id_voter, process_e, cant_vote);
     	  DistrictDto dto = createNewDto(resultSet);
          list.add(dto);
       }
@@ -84,17 +73,6 @@ public class DistrictServiceImpl implements DistrictService {
       ResultSet resultSet = pstmt.executeQuery();
 
       while (resultSet.next()) {
-         // int id_nominated = resultSet.getInt(1); // parametro 6
-         // int id_voter = resultSet.getInt(2); // parametro 7
-         // String occupation = resultSet.getString(3); // parametro 1
-         // String profetion = resultSet.getString(4); // parametro 2
-         // String phone = resultSet.getString(5); // parametro 3
-         // String int_rev = resultSet.getString(6); // parametro 4
-         // String bio_data = resultSet.getString(7); // parametro 5
-         // int process_e = resultSet.getInt(8); // parametro 8
-         // int cant_vote = resultSet.getInt(9); // parametro 9
-
-         // nominated = new NominatedDto(occupation, profetion, phone, int_rev, bio_data, id_nominated, id_voter, process_e, cant_vote);
     	  district = createNewDto(resultSet);
       }
 
@@ -136,24 +114,24 @@ public class DistrictServiceImpl implements DistrictService {
 
    }
 
-   // ---------------------------> ESTE METODO SEGURO ES ALGO ESPECIFICO DE GIANFRANCO <---------------------------
-   // @Override
-   // public NominatedDto getNominatedByName(String nominatedName) throws SQLException {
-   //    NominatedDto nominated = null;
+   @Override
+   public int getIdByName(String districtName) throws SQLException {
+      DistrictDto district = null;
 
-   //    PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
-   //              "SELECT * FROM hotel_chain where chain_name = ?");
+      PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
+                "SELECT * FROM district where name_district = ?");
 
-   //    pstmt.setString(1, nominatedName);
+      pstmt.setString(1, districtName);
 
-   //    ResultSet resultSet = pstmt.executeQuery();
+      ResultSet resultSet = pstmt.executeQuery();
 
-   //    while (resultSet.next()) {
-   //       int nominatedId = resultSet.getInt(2);
+      while (resultSet.next()) {
+         int idDistrict = resultSet.getInt(1);
+         
+         district = new DistrictDto();
+         district.setCodDis(idDistrict);
+      }
 
-   //       nominated = new NominatedDto(nominatedId, nominatedName);
-   //    }
-
-   //    return nominated;
-   // }
+      return district.getCodDis();
+   }
 }

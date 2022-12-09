@@ -10,12 +10,12 @@
 			<p:outputPanel rendered="#{not empty manageNominatedBean.selectedNominated}">
 				<p:panelGrid layout="grid" columns="2">
 					<h:panelGroup>
-						<div class="p-field">
+						<!-- <div class="p-field">
 							<p:outputLabel for="@next">Nombre:</p:outputLabel>
 							<p:inputText id="name" class="test" required="true" 
 								value="#{manageNominatedBean.selectedNominated.namVot}" />
 							<p:message for="@previous" ></p:message>
-						</div>
+						</div> -->
 						<div class="p-field">
 							<p:outputLabel for="@next">Telefono:</p:outputLabel>
 							<p:inputText id="telefono" class="test" required="true"
@@ -45,10 +45,10 @@
 								value="#{manageNominatedBean.selectedNominated.intgRNomi}" />
 							<p:message for="@previous"></p:message>
 						</div>
-						<div class="p-field">
+						<!-- <div class="p-field">
 							<p:outputLabel>Fecha de Nacimiento:</p:outputLabel>
 							<p:datePicker class="test" id="fecha_nac" value="#{calendarView.date7}" showIcon="true" />
-						</div>
+						</div> -->
 						<div class="p-field">
 							<p:outputLabel>Biografia:</p:outputLabel>
 							<p:inputTextarea class="test" rows="5" cols="30"

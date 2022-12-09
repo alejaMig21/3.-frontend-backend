@@ -22,35 +22,41 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class NominatedsController {
 
 	@Autowired
-    private NominatedService nominatedService;
+  private NominatedService nominatedService;
 
   @GetMapping("/")
   public ResponseEntity<List<NominatedDto>> getNominateds() throws SQLException {
     List<NominatedDto> nominatedList = nominatedService.listNominateds();
-      return ResponseEntity.ok(nominatedList);
+    return ResponseEntity.ok(nominatedList);
   }
 
 	@GetMapping("/{id}")
-    public ResponseEntity<NominatedDto> getNominatedById(@PathVariable int id) throws SQLException {
-      NominatedDto nominated = nominatedService.getNominatedById(id);
-        return ResponseEntity.ok(nominated);
-    }
+  public ResponseEntity<NominatedDto> getNominatedById(@PathVariable int id) throws SQLException {
+    NominatedDto nominated = nominatedService.getNominatedById(id);
+    return ResponseEntity.ok(nominated);
+  }
    
-   @PostMapping("/")
-    public ResponseEntity<String> createNominated(@RequestBody NominatedDto nominated) throws SQLException {
-      nominatedService.createNominated(nominated);
-        return ResponseEntity.ok("Nominated Created");
-    }
+  @PostMapping("/")
+  public ResponseEntity<String> createNominated(@RequestBody NominatedDto nominated) throws SQLException {
+    nominatedService.createNominated(nominated);
+    return ResponseEntity.ok("Nominated Created");
+  }
    
-   @PutMapping("/")
-    public ResponseEntity<String> updateNominated(@RequestBody NominatedDto nominated) throws SQLException {
-      nominatedService.updateNominated(nominated);
-        return ResponseEntity.ok("Nominated Updated");
-    }
+  @PutMapping("/")
+  public ResponseEntity<String> updateNominated(@RequestBody NominatedDto nominated) throws SQLException {
+    nominatedService.updateNominated(nominated);
+    return ResponseEntity.ok("Nominated Updated");
+  }
    
-   @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteNominated(@PathVariable int id) throws SQLException {
-      nominatedService.deleteNominated(id);
-        return ResponseEntity.ok("Nominated deleted");
-    }
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteNominated(@PathVariable int id) throws SQLException {
+    nominatedService.deleteNominated(id);
+    return ResponseEntity.ok("Nominated deleted");
+  }
+
+  @GetMapping("/name/{name}")
+  public ResponseEntity<Integer> getByName(@PathVariable String name) throws SQLException {
+    int id = nominatedService.getIdByName(name);
+    return ResponseEntity.ok(id);
+  }
 }

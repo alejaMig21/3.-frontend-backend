@@ -54,4 +54,10 @@ public class DistrictController {
 		districtService.deleteDistrict(id);
         return ResponseEntity.ok("District deleted");
     }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Integer> getByName(@PathVariable String name) throws SQLException {
+        int id = districtService.getIdByName(name);
+        return ResponseEntity.ok(id);
+    }
 }
