@@ -29,22 +29,17 @@ public class CollegeServiceImpl implements CollegeService{
 	@Override
 	public List<CollegeDto> getColleges() {
 		
-		List<CollegeDto> cdrList = new ArrayList<CollegeDto>();
+		List<CollegeDto> collegeList = new ArrayList<CollegeDto>();
 	    try {
 	    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		    ApiRestMapper<CollegeDto> apiRestMapper = new ApiRestMapper<>();
 		    String response = (String)restService.GET("/api/v1/colleges/", params, String.class).getBody();
-		    cdrList = apiRestMapper.mapList(response, CollegeDto.class);
+		    collegeList = apiRestMapper.mapList(response, CollegeDto.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return cdrList;
+		return collegeList;
 	}
-
-	// @Override
-	// public CDRDto getCDRById(int userId) { // Originalmente era String
-	// 	return getCDRs().stream().filter(r -> r.getId().equals(userId)).findFirst().get();
-	// }
 
 	@Override
     public CollegeDto getCollegeById(int id_college) {
@@ -63,27 +58,6 @@ public class CollegeServiceImpl implements CollegeService{
         }
         return college;
     }
-
-	// @Override
-    // public int getIdByName(String collegeName) {
-    //     CollegeDto college = null;
-
-    //     try {
-    //         String uri = "/api/v1/colleges/" + "name/{name}";
-    //         Map<String, String> map = new HashMap<>();
-    //         map.put("name", collegeName);
-
-    //         String response = (String) restService.GETEntity(
-    //                 uri, map,
-    //                 String.class).getBody();
-
-    //         ApiRestMapper<CollegeDto> apiRestMapper = new ApiRestMapper<>();
-    //         college = apiRestMapper.mapOne(response, CollegeDto.class);
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    //     return college.getId_college();
-    // }
 
 	@Override
     public int getIdByName(String collegeName) {

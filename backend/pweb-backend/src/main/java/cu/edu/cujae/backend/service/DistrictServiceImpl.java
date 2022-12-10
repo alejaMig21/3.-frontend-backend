@@ -19,9 +19,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import cu.edu.cujae.backend.core.dto.DistrictDto;
-import cu.edu.cujae.backend.core.dto.NominatedDto;
 import cu.edu.cujae.backend.core.service.DistrictService;
-import cu.edu.cujae.backend.core.service.NominatedService;
 
 @Service
 public class DistrictServiceImpl implements DistrictService {
@@ -41,8 +39,6 @@ public class DistrictServiceImpl implements DistrictService {
    public List<DistrictDto> listDistricts() throws SQLException { // Aparentemente esta funcion ya esta
       List<DistrictDto> list = new ArrayList<>();
 
-      //String function = "{?= call select_all_nominateds()}";
-      //String function = "{?= call SELECT * FROM district}";
       String function = "{?= call read_list_district()}";
 
       Connection connection = jdbcTemplate.getDataSource().getConnection();
@@ -108,7 +104,7 @@ public class DistrictServiceImpl implements DistrictService {
       String function = "{call delete_district(?)}";
 
       CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
-      //statement.setInt(1, nominatedId); <------ Linea original
+      
       statement.setInt(1, districtId);
       statement.execute();
 

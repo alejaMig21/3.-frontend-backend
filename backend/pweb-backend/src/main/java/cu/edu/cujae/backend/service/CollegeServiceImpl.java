@@ -90,14 +90,14 @@ public class CollegeServiceImpl implements CollegeService {
    }
 
    @Override
-   public void updateCollege(CollegeDto cdr) throws SQLException { // Originalmente este metodo actualizaba ademas de los valores del Dto su ID tambien
+   public void updateCollege(CollegeDto college) throws SQLException { // Originalmente este metodo actualizaba ademas de los valores del Dto su ID tambien
       String function = "{call update_college(?,?,?,?)}";
 
       CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
-      statement.setInt(1, cdr.getIdCollege());
-      statement.setInt(2, cdr.getDistrict()); // Es el ID
-      statement.setString(3, cdr.getNameCollege());
-      statement.setString(4, cdr.getAddress());
+      statement.setInt(1, college.getIdCollege());
+      statement.setInt(2, college.getDistrict()); // Es el ID
+      statement.setString(3, college.getNameCollege());
+      statement.setString(4, college.getAddress());
       statement.execute();
 
    }

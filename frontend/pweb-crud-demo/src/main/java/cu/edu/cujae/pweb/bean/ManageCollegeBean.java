@@ -15,9 +15,7 @@ import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cu.edu.cujae.pweb.dto.CDRDto;
 import cu.edu.cujae.pweb.dto.CollegeDto;
-import cu.edu.cujae.pweb.service.CDRService;
 import cu.edu.cujae.pweb.service.CollegeService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 

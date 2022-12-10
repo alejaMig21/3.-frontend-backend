@@ -38,11 +38,6 @@ public class VoterServiceImpl implements VoterService{
 		return cdrList;
 	}
 
-	// @Override
-	// public CDRDto getCDRById(int userId) { // Originalmente era String
-	// 	return getCDRs().stream().filter(r -> r.getId().equals(userId)).findFirst().get();
-	// }
-
 	@Override
     public VoterDto getVoterById(int idVoter) {
         VoterDto cdr = null;
@@ -60,27 +55,6 @@ public class VoterServiceImpl implements VoterService{
         }
         return cdr;
     }
-
-	// @Override
-    // public int getIdByName(String voterName) {
-    //     VoterDto voter = null;
-
-    //     try {
-    //         String uri = "/api/v1/voters/" + "name/{name}";
-    //         Map<String, String> map = new HashMap<>();
-    //         map.put("name", voterName);
-
-    //         String response = (String) restService.GETEntity(
-    //                 uri, map,
-    //                 String.class).getBody();
-
-    //         ApiRestMapper<VoterDto> apiRestMapper = new ApiRestMapper<>();
-    //         voter = apiRestMapper.mapOne(response, VoterDto.class);
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    //     return voter.getNumID();
-    // }
 
 	@Override
     public int getIdByName(String voterName) {

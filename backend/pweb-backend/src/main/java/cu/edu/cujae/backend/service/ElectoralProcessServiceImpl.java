@@ -51,17 +51,6 @@ public class ElectoralProcessServiceImpl implements ElectoralProcessService {
       ResultSet resultSet = (ResultSet) statement.getObject(1);
 
       while (resultSet.next()) {
-         // int id_nominated = resultSet.getInt(1); // parametro 6
-         // int id_voter = resultSet.getInt(2); // parametro 7
-         // String occupation = resultSet.getString(3); // parametro 1
-         // String profetion = resultSet.getString(4); // parametro 2
-         // String phone = resultSet.getString(5); // parametro 3
-         // String int_rev = resultSet.getString(6); // parametro 4
-         // String bio_data = resultSet.getString(7); // parametro 5
-         // int process_e = resultSet.getInt(8); // parametro 8
-         // int cant_vote = resultSet.getInt(9); // parametro 9
-
-         //NominatedDto dto = new NominatedDto(occupation, profetion, phone, int_rev, bio_data, id_nominated, id_voter, process_e, cant_vote);
          Electoral_ProcessDto dto = createNewDto(resultSet);
          list.add(dto);
       }
@@ -81,17 +70,6 @@ public class ElectoralProcessServiceImpl implements ElectoralProcessService {
       ResultSet resultSet = pstmt.executeQuery();
 
       while (resultSet.next()) {
-         // int id_nominated = resultSet.getInt(1); // parametro 6
-         // int id_voter = resultSet.getInt(2); // parametro 7
-         // String occupation = resultSet.getString(3); // parametro 1
-         // String profetion = resultSet.getString(4); // parametro 2
-         // String phone = resultSet.getString(5); // parametro 3
-         // String int_rev = resultSet.getString(6); // parametro 4
-         // String bio_data = resultSet.getString(7); // parametro 5
-         // int process_e = resultSet.getInt(8); // parametro 8
-         // int cant_vote = resultSet.getInt(9); // parametro 9
-
-         // nominated = new NominatedDto(occupation, profetion, phone, int_rev, bio_data, id_nominated, id_voter, process_e, cant_vote);
          electoralProcess = createNewDto(resultSet);
       }
 
@@ -109,45 +87,24 @@ public class ElectoralProcessServiceImpl implements ElectoralProcessService {
    }
 
    @Override
-   public void updateElectoralProcess(Electoral_ProcessDto cdr) throws SQLException { // Originalmente este metodo actualizaba ademas de los valores del Dto su ID tambien
+   public void updateElectoralProcess(Electoral_ProcessDto electoralProcess) throws SQLException { // Originalmente este metodo actualizaba ademas de los valores del Dto su ID tambien
       String function = "{call update_electoral_process(?,?)}";
 
       CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
-      statement.setInt(1, cdr.getId_EProcess());
-      statement.setInt(2, cdr.getRoundNum());
+      statement.setInt(1, electoralProcess.getId_EProcess());
+      statement.setInt(2, electoralProcess.getRoundNum());
       statement.execute();
 
    }
 
    @Override
-   public void deleteElectoralProcess(int cdrId) throws SQLException {
+   public void deleteElectoralProcess(int electoralProcessId) throws SQLException {
       String function = "{call delete_electoral_process(?)}";
 
       CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
-      //statement.setInt(1, nominatedId); <------ Linea original
-      statement.setInt(1, cdrId);
+      
+      statement.setInt(1, electoralProcessId);
       statement.execute();
 
    }
-
-   // ---------------------------> ESTE METODO SEGURO ES ALGO ESPECIFICO DE GIANFRANCO <---------------------------
-   // @Override
-   // public NominatedDto getNominatedByName(String nominatedName) throws SQLException {
-   //    NominatedDto nominated = null;
-
-   //    PreparedStatement pstmt = jdbcTemplate.getDataSource().getConnection().prepareStatement(
-   //              "SELECT * FROM hotel_chain where chain_name = ?");
-
-   //    pstmt.setString(1, nominatedName);
-
-   //    ResultSet resultSet = pstmt.executeQuery();
-
-   //    while (resultSet.next()) {
-   //       int nominatedId = resultSet.getInt(2);
-
-   //       nominated = new NominatedDto(nominatedId, nominatedName);
-   //    }
-
-   //    return nominated;
-   // }
 }

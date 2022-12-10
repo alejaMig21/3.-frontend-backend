@@ -42,7 +42,7 @@ public class DistrictServiceImpl implements DistrictService{
 
 	@Override
     public DistrictDto getDistrictById(int idDistrict) {
-        DistrictDto cdr = null;
+        DistrictDto district = null;
 
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -51,11 +51,11 @@ public class DistrictServiceImpl implements DistrictService{
             UriTemplate template = new UriTemplate("/api/v1/districts/" + "{idDistrict}");
             String uri = template.expand(idDistrict).toString();
             String response = (String) restService.GET(uri, params, String.class).getBody();
-            cdr = apiRestMapper.mapOne(response, DistrictDto.class);
+            district = apiRestMapper.mapOne(response, DistrictDto.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return cdr;
+        return district;
     }
 
 	@Override

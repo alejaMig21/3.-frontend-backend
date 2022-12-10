@@ -47,8 +47,6 @@ public class VoterServiceImpl implements VoterService {
    public List<VoterDto> listVoters() throws SQLException { // Aparentemente esta funcion ya esta
       List<VoterDto> list = new ArrayList<>();
 
-      //String function = "{?= call select_all_nominateds()}";
-      //String function = "{?= call SELECT * FROM voters}";
       String function = "{?= call read_list_voter()}";
 
       Connection connection = jdbcTemplate.getDataSource().getConnection();

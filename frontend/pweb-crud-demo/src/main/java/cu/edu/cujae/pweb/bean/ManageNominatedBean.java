@@ -94,9 +94,9 @@ public class ManageNominatedBean {
         return this.nominateds;
     }
 
-    public void setCdrs(List<NominatedDto> nominateds) {
-        this.nominateds = nominateds;
-    }
+    // public void setCdrs(List<NominatedDto> nominateds) {
+    //     this.nominateds = nominateds;
+    // }
 
     public NominatedDto getSelectedNominated() {
         return this.selectedNominated;
