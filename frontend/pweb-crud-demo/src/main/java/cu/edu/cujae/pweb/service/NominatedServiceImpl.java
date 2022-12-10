@@ -32,7 +32,7 @@ public class NominatedServiceImpl implements NominatedService{
 	    try {
 	    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		    ApiRestMapper<NominatedDto> apiRestMapper = new ApiRestMapper<>();
-		    String response = (String)restService.GET("/api/v1/nominateds/", params, String.class).getBody();
+		    String response = (String)restService.GET("/api/v1/nominateds/" + "", params, String.class).getBody();
 		    nominatedList = apiRestMapper.mapList(response, NominatedDto.class);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -18,7 +18,7 @@ import cu.edu.cujae.backend.core.service.MunicipalityService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/api/v1/municipalities")
+@RequestMapping("/api/v1/municipalitys")
 public class MunicipalityController {
 
   @Autowired
@@ -37,26 +37,26 @@ public class MunicipalityController {
   }
 
   @PostMapping("/")
-  public ResponseEntity<String> createMunicipality(@RequestBody MunicipalityDto voter) throws SQLException {
-    municipalityService.createMunicipality(voter);
+  public ResponseEntity<String> createMunicipality(@RequestBody MunicipalityDto municipality) throws SQLException {
+    municipalityService.createMunicipality(municipality);
     return ResponseEntity.ok("Municipality Created");
   }
 
   @PutMapping("/")
-  public ResponseEntity<String> updateMunicipality(@RequestBody MunicipalityDto voter) throws SQLException {
-    municipalityService.updateMunicipality(voter);
+  public ResponseEntity<String> updateMunicipality(@RequestBody MunicipalityDto municipality) throws SQLException {
+    municipalityService.updateMunicipality(municipality);
     return ResponseEntity.ok("Municipality Updated");
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<String> deleteMunicipality(@PathVariable int id) throws SQLException {
-    municipalityService.deleteMunicipality(id);
+  public ResponseEntity<String> deleteMunicipality(@PathVariable int municipalityId) throws SQLException {
+    municipalityService.deleteMunicipality(municipalityId);
     return ResponseEntity.ok("Municipality Deleted");
   }
 
   @GetMapping("/name/{name}")
-  public ResponseEntity<Integer> getByName(@PathVariable String name) throws SQLException {
-    int id = municipalityService.getIdByName(name);
+  public ResponseEntity<Integer> getByName(@PathVariable String municipalityName) throws SQLException {
+    int id = municipalityService.getIdByName(municipalityName);
     return ResponseEntity.ok(id);
   }
 }

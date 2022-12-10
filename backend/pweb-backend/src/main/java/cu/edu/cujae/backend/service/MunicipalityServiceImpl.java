@@ -38,8 +38,6 @@ public class MunicipalityServiceImpl implements MunicipalityService {
    public List<MunicipalityDto> getMunicipalitys() throws SQLException { // Aparentemente esta funcion ya esta
       List<MunicipalityDto> list = new ArrayList<>();
 
-      // String function = "{?= call select_all_nominateds()}";
-      // String function = "{SELECT * FROM municipality = ?}";
       String function = "{?= call read_list_municipality()}";
 
       Connection connection = jdbcTemplate.getDataSource().getConnection();
@@ -106,7 +104,7 @@ public class MunicipalityServiceImpl implements MunicipalityService {
       String function = "{call delete_municipality(?)}";
 
       CallableStatement statement = jdbcTemplate.getDataSource().getConnection().prepareCall(function);
-      // statement.setInt(1, nominatedId); <------ Linea original
+      
       statement.setInt(1, municipalityId);
       statement.execute();
 

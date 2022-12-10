@@ -48,7 +48,8 @@ public class ManageMunicipalityBean {
 
     }
 
-    public void saveNominated() {
+    public void saveMunicipality() {
+        System.out.println("El CODIGO ES " + selectedMunicipality.getCodMun());
         if (this.selectedMunicipality.getCodMun() == 0) {
             service.createMunicipality(selectedMunicipality);
 
@@ -82,16 +83,16 @@ public class ManageMunicipalityBean {
         return this.municipalitys;
     }
 
-    public void setCdrs(List<MunicipalityDto> nominateds) {
-        this.municipalitys = nominateds;
+    public void setMunicipalitys(List<MunicipalityDto> municipalitys) {
+        this.municipalitys = municipalitys;
     }
 
     public MunicipalityDto getSelectedMunicipality() {
         return this.selectedMunicipality;
     }
 
-    public void setSelectedNominated(MunicipalityDto selectedNominated) {
-        this.selectedMunicipality = selectedNominated;
+    public void setSelectedMunicipality(MunicipalityDto selectedMunicipality) {
+        this.selectedMunicipality = selectedMunicipality;
     }
 
     public MunicipalityService getService() {

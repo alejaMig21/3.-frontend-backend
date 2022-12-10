@@ -1,8 +1,7 @@
 package cu.edu.cujae.backend.core.dto;
 
 public class MunicipalityDto {
-	
-	private int codMun;
+	private int codMun = 0;
 	private String nameMunicipality;
 	
 	public MunicipalityDto() {
@@ -25,7 +24,4 @@ public class MunicipalityDto {
 	public void setNameMunicipality(String namMun) {
 		this.nameMunicipality = namMun;
 	}
-	
-	
-
 }

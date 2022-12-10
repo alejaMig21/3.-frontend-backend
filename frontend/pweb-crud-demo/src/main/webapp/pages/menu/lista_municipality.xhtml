@@ -56,7 +56,7 @@
 							oncomplete="PF('manageMunicipalityDialog').show()"
 							styleClass="edit-button rounded-button ui-button-success"
 							process="@this">
-							<f:setPropertyActionListener value="#{cdr}"
+							<f:setPropertyActionListener value="#{municipality}"
 								target="#{manageMunicipalityBean.selectedMunicipality}" />
 							<p:resetInput target=":form:manage-municipality-content" />
 						</p:commandButton>
@@ -72,7 +72,6 @@
 				</p:dataTable>
 
 				<ui:include src="municipality-form.xhtml"></ui:include>
-				<!-- <ui:include src="/pages/menu/cdr-form.xhtml"></ui:include> -->
 
 				<p:confirmDialog global="true" showEffect="fade" width="300">
 					<p:commandButton value="Si" type="button"
